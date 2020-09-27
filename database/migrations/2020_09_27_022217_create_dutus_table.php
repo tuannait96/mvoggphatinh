@@ -21,9 +21,11 @@ class CreateDutusTable extends Migration
 			$table->string('parish');
 			$table->unsignedBigInteger('idzone');
 			$table->unsignedBigInteger('idyear');
+			$table->unsignedBigInteger('idstatus');
 			$table->foreign('id')->references('id')->on('users');
 			$table->foreign('idzone')->references('id')->on('zones');
 			$table->foreign('idyear')->references('id')->on('years');
+			$table->foreign('idstatus')->references('id')->on('statuses');
             $table->timestamps();
         });
     }
