@@ -1,7 +1,18 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" type="text/css">
+    <link href="../assets/css/lg/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/lg/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/lg/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/lg/bootstrap-social.css" rel="stylesheet" type="text/css">   
+    <link href="./assets/css/lg/templatemo_style.css" rel="stylesheet" type="text/css">   
+    <link href="../assets/css/lg/lg.css" rel="stylesheet" type="text/css"> 
+    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
