@@ -30,9 +30,9 @@
     
 </head>
 <body class="templatemo-bg-image-1">
-    <div class="container">
+    <div class="container-fluid">
         <div class="col-md-12">         
-            <form class="form-horizontal templatemo-login-form-2" role="form" action="{{ route('login') }}" method="post"> @csrf
+            <form class="templatemo-login-form-2" role="form" action="{{ route('login') }}" method="post"> @csrf
                 <div class="row">
                     <div class="col-md-12">
                         <h1>Đăng nhập</h1>
@@ -71,11 +71,18 @@
                         </div>
                         <div class="form-group">
                           <div class="col-md-12">
-                            <div class="checkbox">
+                       <!--     <div class="checkbox">
                                 <label>
                                   <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Ghi nhớ
                                 </label>
-                            </div>
+                            </div>-->
+                            <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
                           </div>
                         </div>
                         <div class="form-group">
@@ -85,7 +92,15 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <a href="forgot-password.html" class="text-center">Quên mật khẩu</a>
+                                 @if (Route::has('password.request'))
+                                    <a href="{{ route('password.request') }}">
+                                        {{ __('Quên mật khẩu') }}
+                                    </a>
+                                @endif
+                            </div>
+                            <div class="col-md-12"> 
+                                <a href="{{'register'}}" class="text-center">Đăng ký</a>
+                            </div>
                             </div>
                         </div>
                     </div>
