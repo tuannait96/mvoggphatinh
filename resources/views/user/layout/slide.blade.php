@@ -1,0 +1,1 @@
+slide.blade.php

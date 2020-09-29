@@ -1,6 +1,6 @@
  <!-- Content Wrapper. Contains page content -->
 
-	@extends('admin.layout.index')
+	@extends('admin.layout.layout')
 	@section('content')
    <div class="content-wrapper">
     <section class="content">
@@ -125,7 +125,7 @@
                     <td id="nhom">Đà Nẵng</td>
                     <td id="trangthai"><small class="badge badge-primary">Đang sinh hoạt</small></td>
                     <td>
-                      <i class="fa fa-eye" style="color:green; padding-right: 10%""></i>
+                      <i class="fa fa-eye" style="color:green; padding-right: 10%"></i>
                       <i class="fa fa-edit" style="color:blue; padding-right: 10%"></i>
                       <i class="fas fa-trash-alt" style="color:red"></i>
                     </td>
