@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Attendance;
+use App\Role;
 
-class Year extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,17 @@ class Year extends Controller
      */
     public function index()
     {
-        //
+        // hàm index của admin sẽ trả về danh sách các dự tu, thống kê số lượng dự tu các nhóm hiển thị lên biểu đồ của admin
+        //$iddt=Attendance::all()->pluck('user','iddutu')->where('id','1');
+        $iddt=Attendance::get()->where('iddutu','1');
+		//dd($iddt);
+        foreach ($iddt as $i) {
+            # code...
+            echo($i->name);
+        }
+
+        //update 1 model
+        //Role::where('id', 4)->update(['name' => 'Cha Giáo']);
     }
 
     /**
