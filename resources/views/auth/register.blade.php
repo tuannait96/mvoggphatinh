@@ -44,43 +44,56 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Đăng ký một thành viên mới</p>
 
-      <form class="needs-validation" action="{{ route('register') }}" method="post" 
-        oninput='pw2.setCustomValidity(pw2.value != up.value ? "Passwords không trùng khớp." : "")'>
+      <form class="needs-validation" action="{{ route('register') }}" method="post" >
         @csrf
         <div class="input-group mb-3">
-          <input id="name" type="text" class="form-control" placeholder="Tên thánh và họ tên" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Tên thánh và họ tên" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
-          <div class="invalid-feedback">
-            Hãy nhập Tên
-          </div>
+          
+            @error('name')
+             <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+             </span>
+           @enderror
+         
         </div>
         <div class="input-group mb-3">
-          <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="Email" required>
+          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="Email" required>
+         
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div> 
-          <div class="invalid-feedback">
-            Hãy nhập Email
-          </div>
+         
+            @error('email')
+             <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+             </span>
+           @enderror
+         
         </div>
       
         <div class="input-group mb-3">
-          <input type="password" id="password" class="form-control"  placeholder="Password" name="password" required autocomplete="new-password">
+          <input type="password" id="password" class="form-control @error('password') is-invalid @enderror"  placeholder="Password" name="password" required autocomplete="new-password">
+           
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
-          <div class="invalid-feedback">
-            Hãy nhập mật khẩu
-          </div>
+          
+            @error('password')
+             <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+             </span>
+           @enderror
+         
         </div>
         <div class="input-group mb-3">
           <input d="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Retype password">
@@ -88,9 +101,6 @@
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
-          </div>
-          <div class="invalid-feedback">
-            Hãy nhập retype mật khẩu
           </div>
         </div>
         <div class="row">
@@ -122,45 +132,6 @@
 <!-- /.register-box -->
 
 <!--  js -->
-<!-- jQuery -->
-<script src="{{asset('user_asset/assets/js/validate_form.js')}}" defer></script>
-<script src="plugins/jquery/jquery.min.js')}}" defer></script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('admin_asset/plugins/bootstrap/js/bootstrap.bundle.min.js')}}" defer></script>
-<!-- Select2 -->
-<script src="{{asset('admin_asset/plugins/select2/js/select2.full.min.js')}}" defer></script>
 
-<!-- InputMask -->
-<script src="{{asset('admin_asset/plugins/moment/moment.min.js')}}" defer></script>
-
-
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{{asset('admin_asset/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}" defer></script>
-
-<!-- AdminLTE App -->
-<script src="{{asset('admin_asset/dist/js/adminlte.min.js')}}" defer></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{asset('admin_asset/dist/js/demo.js')}}" defer></script>
-<!-- Page script -->
-<script>
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-    
-    /* DATE PICKER
-    //Date range picker
-    $('#reservationdate').datetimepicker({
-        format: 'L'
-    });*/
-    
-    
-    
-  })
-</script>
 </body>
 </html>
