@@ -20,3 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', function () {
+    return view('admin/home');
+});
+Route::get('/udinf', function () {
+    return view('auth/update_info');
+});
