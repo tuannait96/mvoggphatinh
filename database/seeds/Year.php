@@ -25,6 +25,10 @@ class Year extends Seeder
 		[
 		'id'=>'3',
 		'name'=>'Năm Ba'
+		],
+		[
+		'id'=>'4',
+		'name'=>'Dự tu tự do'
 		]
 		);
 		DB::table('years')->insert($year);

@@ -19,6 +19,8 @@ class CreateDutusTable extends Migration
 			$table->string('name');
 			$table->date('dob');
 			$table->string('parish');
+			$table->string('school');
+			$table->string('majors');
 			$table->unsignedBigInteger('idzone');
 			$table->unsignedBigInteger('idyear');
 			$table->unsignedBigInteger('idstatus');
