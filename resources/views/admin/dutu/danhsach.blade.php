@@ -18,6 +18,8 @@
             <form action="#">
                 <span class="close">&times;</span>
                 <h2 id="tieude_add">Thêm nhóm mới</h2>
+                
+                
                 <div class="fomrgroup">
                     <span>Mã nhóm:</span>
                     <input class="form-control" placeholder="Mã nhóm ..." disabled="" name="manhom">
@@ -35,7 +37,7 @@
         </div>
     </div>
 </div>
-
+        
 
         <!-- het thu --> 
         <div class="col-md-12" id="danhsach_nhom">
@@ -113,26 +115,60 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td id="stt">1</td>
-                    <td id="ma">1</td>
-                    <td id="ten">Giuse Nguyễn Anh Tuấn</td>
-                    <td id=ns>9/9/1996</td>
-                    <td id="truong">Đại học Bôn Ba</td>
-                    <td id="nganh">Công nghệ thông tin</td>
-                    <td id="xu">Khe Gát</td>
-                    <td id="nam">Năm 2</td>
-                    <td id="nhom">Đà Nẵng</td>
-                    <td id="trangthai"><small class="badge badge-primary">Đang sinh hoạt</small></td>
-                    <td>
-                      <i class="fa fa-eye" style="color:green; padding-right: 10%"></i>
-                      <i class="fa fa-edit" style="color:blue; padding-right: 10%"></i>
-                      <i class="fas fa-trash-alt" style="color:red"></i>
-                    </td>
-                  
-                  
+                      @foreach ($iddt as $i)
+                        <tr>
+                          <td id="stt">{{$i->id}}</td>
+                          <td id="ma">{{$i->id}}</td>
+                          <td id="ten">{{$i->name}}</td>
+                          <td id=ns>{{$i->dob}}</td>
+                          <td id="truong">{{$i->id}}</td>
+                          <td id="nganh">{{$i->id}}</td>
+                          <td id="xu">{{$i->parish}}</td>
+                          <td id="nam">{{$i->nameyear->name}}</td>
+                          <td id="nhom">{{$i->namezone->name}}</td>
+                          <td id="trangthai"><small class="badge badge-primary">{{$i->namestatus->name}}</small></td>
+                          <td>
+                            <a class="fa fa-eye" style="color:green; padding-right: 10%" href="{{url('dutu',$i->id)}}"></a>
+                            <i class="fa fa-edit" style="color:blue; padding-right: 10%"></i>
+                            <i class="fas fa-trash-alt" style="color:red"></i>
+                          </td>
+                        </tr>
+                      @endforeach
                   </tbody>
                 </table>
+				
+
+				<!-- test thống kê điểm danh-->
+				<table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Tên thành viên</th>
+                    @foreach ($izone->first->getattend->getattend as $j)
+						<th>Tháng {{$j->time}}</th>
+					@endforeach
+                  </tr>
+                  </thead>
+                  <tbody>
+                      @foreach ($izone as $i)
+                        <tr>
+                          <td id="stt">{{$i->id}}</td>
+                          <td id="ten">{{$i->name}}</td>
+						  @foreach ($i->getattend as $j)
+							<td>{{$j->status}} {{$j->note}}</td>
+						  @endforeach
+                          <td>
+                            <i class="fa fa-eye" style="color:green; padding-right: 10%" href=""></i>
+                            <i class="fa fa-edit" style="color:blue; padding-right: 10%"></i>
+                            <i class="fas fa-trash-alt" style="color:red"></i>
+                          </td>
+                        </tr>
+                      @endforeach
+                  </tbody>
+                </table>
+				
+				<!-- Kết thúc test-->
+				
               </div>
               <!-- /.card-body -->
               

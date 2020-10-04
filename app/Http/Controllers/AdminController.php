@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Attendance;
 use App\Role;
+use App\Dutu;
+use App\Zone;
 
 class AdminController extends Controller
 {
@@ -18,15 +20,34 @@ class AdminController extends Controller
     {
         // hàm index của admin sẽ trả về danh sách các dự tu, thống kê số lượng dự tu các nhóm hiển thị lên biểu đồ của admin
         //$iddt=Attendance::all()->pluck('user','iddutu')->where('id','1');
-        $iddt=Attendance::get()->where('iddutu','1');
-		//dd($iddt);
+        $iddt=Dutu::get();
+		/*dd($iddt->namezone);
         foreach ($iddt as $i) {
-            # code...
-            echo($i->name);
-        }
+            //dd($i->namezone->name);
+        }*/
 
+
+		//get all dutu from zone...
+		$izone=Dutu::get();
+		//dd($izone->id);
+		//dd($izone->first->getattend->status);
+
+		//test insert dutu
+		$data=[];
+		$data=[
+			'holyname'=>'Peter',
+            'name' => 'Tuấn',
+			'dob'=>'1993-02-02',
+			'parish'=>'Khe gát',
+			'idzone'=>1,
+			'idyear'=>1,
+			'idstatus'=>1
+		];
+		
         //update 1 model
         //Role::where('id', 4)->update(['name' => 'Cha Giáo']);
+        return view('admin.dutu.danhsach',compact('iddt','izone'));
+		
     }
 
     /**
