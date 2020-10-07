@@ -37,17 +37,16 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="#"><b>Đăng Ký</b> thành viên mới</a>
+    <a href="#"><b>Cập nhật</b> thông tin</a>
   </div>
 
   <div class="card">
     <div class="card-body register-card-body">
-      <p class="login-box-msg">Đăng ký một thành viên mới</p>
-
-      <form class="needs-validation" action="{{ route('register') }}" method="post" >
+      
+      <form class="needs-validation" action="" method="post" >
         @csrf
         <div class="input-group mb-3">
-          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Tên thánh và họ tên" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Tên Thánh - họ tên" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
@@ -78,31 +77,95 @@
            @enderror
          
         </div>
-      
+        <span>Ngày sinh:</span>
         <div class="input-group mb-3">
-          <input type="password" id="password" class="form-control @error('password') is-invalid @enderror"  placeholder="Password" name="password" required autocomplete="new-password">
-           
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-          
-            @error('password')
+          <input id="birthday" type="date" value="2000-01-01" id="example-date-input" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}" autocomplete="birthday" required>
+         
+            @error('birthday')
              <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
              </span>
            @enderror
          
         </div>
+
         <div class="input-group mb-3">
-          <input d="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Retype password">
-          <div class="input-group-append">
+          <input id="school" type="text" class="form-control @error('scholl') is-invalid @enderror" name="scholl" value="{{ old('scholl') }}" placeholder="Trường học" required autocomplete="scholl" autofocus>
+          
+          <div class="input-group-append ">
             <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+              <span class="fa fa-graduation-cap"></span>
             </div>
           </div>
+          
+            @error('scholl')
+             <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+             </span>
+           @enderror
+         
         </div>
+
+        <div class="input-group mb-3">
+          <input id="parish" type="text" class="form-control @error('parish') is-invalid @enderror" name="parish" value="{{ old('parish') }}" required placeholder="Giáo xứ" autocomplete="parish" autofocus>
+          
+          <div class="input-group-append ">
+            <div class="input-group-text">
+              <span class="fas fa-church"></span>
+            </div>
+          </div>
+          
+            @error('parish')
+             <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+             </span>
+           @enderror
+         
+        </div>
+
+        <div class="input-group mb-3">
+          <select id="year" type="text" class="form-control custom-select browser-default @error('year') is-invalid @enderror" name="year" value="{{ old('year') }}" autocomplete="year" autofocus   style="width: 100%;" required>
+                    <option value="">Chọn năm sinh hoạt</option>
+                    <option value="1">Năm 1</option>
+                    <option value="2">Năm 2</option>
+                    <option value="3">Năm 3</option>
+          </select>
+          <div class="input-group-append ">
+            <div class="input-group-text">
+              <span class="fas fa-calendar-plus"></span>
+            </div>
+          </div>
+          
+            @error('year')
+             <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+             </span>
+           @enderror
+         
+        </div>
+
+        <div class="input-group mb-3">
+          <select id="zone" type="text" class="form-control custom-select browser-default @error('year') is-invalid @enderror" name="zone" value="{{ old('zone') }}" autocomplete="year" autofocus   style="width: 100%;" required>
+                    <option value="">Chọn nhóm sinh hoạt</option>
+                    <option value="1">Nhóm 1</option>
+                    <option value="2">Nhóm 2</option>
+                    <option value="3">Nhóm 3</option>
+          </select>
+          <div class="input-group-append ">
+            <div class="input-group-text">
+              <span class="fas fa-users"></span>
+            </div>
+          </div>
+          
+            @error('zone')
+             <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+             </span>
+           @enderror
+         
+        </div>
+      
+        
         <div class="row">
           <div class="col-12">
             <div class="icheck-primary">
@@ -117,15 +180,13 @@
           </div>
           <!-- /.col -->
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
+            <button type="submit" class="btn btn-primary btn-block">Cập nhật</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
-
       <br/>
-      <a href="{{'login'}}" class="text-center">Tôi đã có tài khoản</a>
-      <a style="float: right;" href="{{url('user')}}" class="text-center">Trở về TRANG CHỦ</a>
+      <a href="{{url('user')}}" class="text-center">Trở về TRANG CHỦ</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

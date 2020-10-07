@@ -26,8 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-		$all = User::all();
-		$all->toJson();
-        return view('home',compact('all'));
+		//$all = User::all();
+		//$all->toJson();
+        return view('user.home',compact('all'));
     }
 }
