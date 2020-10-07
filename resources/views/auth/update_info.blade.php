@@ -46,7 +46,7 @@
       <form class="needs-validation" action="" method="post" >
         @csrf
         <div class="input-group mb-3">
-          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Tên Thánh - họ tên" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
@@ -81,12 +81,6 @@
         <div class="input-group mb-3">
           <input id="birthday" type="date" value="2000-01-01" id="example-date-input" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}" autocomplete="birthday" required>
          
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div> 
-         
             @error('birthday')
              <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
@@ -96,11 +90,11 @@
         </div>
 
         <div class="input-group mb-3">
-          <input id="school" type="text" class="form-control @error('scholl') is-invalid @enderror" name="scholl" value="{{ old('scholl') }}" required autocomplete="scholl" autofocus>
+          <input id="school" type="text" class="form-control @error('scholl') is-invalid @enderror" name="scholl" value="{{ old('scholl') }}" placeholder="Trường học" required autocomplete="scholl" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
-              <span class="fas fa-user"></span>
+              <span class="fa fa-graduation-cap"></span>
             </div>
           </div>
           
@@ -113,11 +107,11 @@
         </div>
 
         <div class="input-group mb-3">
-          <input id="parish" type="text" class="form-control @error('parish') is-invalid @enderror" name="parish" value="{{ old('parish') }}" required autocomplete="parish" autofocus>
+          <input id="parish" type="text" class="form-control @error('parish') is-invalid @enderror" name="parish" value="{{ old('parish') }}" required placeholder="Giáo xứ" autocomplete="parish" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
-              <span class="fas fa-user"></span>
+              <span class="fas fa-church"></span>
             </div>
           </div>
           
@@ -138,7 +132,7 @@
           </select>
           <div class="input-group-append ">
             <div class="input-group-text">
-              <span class="fas fa-user"></span>
+              <span class="fas fa-calendar-plus"></span>
             </div>
           </div>
           
@@ -159,7 +153,7 @@
           </select>
           <div class="input-group-append ">
             <div class="input-group-text">
-              <span class="fas fa-user"></span>
+              <span class="fas fa-users"></span>
             </div>
           </div>
           
@@ -191,6 +185,8 @@
           <!-- /.col -->
         </div>
       </form>
+      <br/>
+      <a href="{{url('user')}}" class="text-center">Trở về TRANG CHỦ</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

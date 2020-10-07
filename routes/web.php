@@ -23,6 +23,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', function () {
     return view('admin/home');
 });
+
+Route::get('/user', function () {
+    return view('user/home');
+});
 Route::get('/udinf', function () {
     return view('auth/update_info');
 });

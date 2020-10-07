@@ -123,8 +123,9 @@
         </div>
       </form>
 
-
+      <br/>
       <a href="{{'login'}}" class="text-center">Tôi đã có tài khoản</a>
+      <a style="float: right;" href="{{url('user')}}" class="text-center">Trở về TRANG CHỦ</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
