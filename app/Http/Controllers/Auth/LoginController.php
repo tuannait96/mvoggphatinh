@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use App\Dutu;
 
 class LoginController extends Controller
 {
@@ -31,11 +32,20 @@ class LoginController extends Controller
     //function direct affter login
     protected function redirectTo()
     {
+		//dd(Dutu::get()->where(Auth::user()->id));
         if (Auth::user()->roleid==1) {
             //dd();
             return '/admin';
         }
-        return '/home';
+		else
+		{
+			if(Dutu::get()->where(Auth::user()->id)->count()==0)
+			{
+				dd();
+				//update information...
+			}
+			return '/home';
+		}
     }
 
 

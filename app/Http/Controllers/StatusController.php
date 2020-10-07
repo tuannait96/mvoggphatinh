@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Status;
 
 class StatusController extends Controller
 {
@@ -36,6 +37,9 @@ class StatusController extends Controller
     public function store(Request $request)
     {
         //
+		Status::create(
+		['name'=>$request->name,
+		]);
     }
 
     /**
@@ -47,6 +51,7 @@ class StatusController extends Controller
     public function show($id)
     {
         //
+		$status=Status::get()->where('id',$id);
     }
 
     /**
@@ -58,6 +63,7 @@ class StatusController extends Controller
     public function edit($id)
     {
         //
+		$status=Status::where('id',$id)->first();
     }
 
     /**
@@ -70,6 +76,9 @@ class StatusController extends Controller
     public function update(Request $request, $id)
     {
         //
+		Status::where('id',$id)->update(
+		['name'=>$request->name,
+		]);
     }
 
     /**
@@ -81,5 +90,6 @@ class StatusController extends Controller
     public function destroy($id)
     {
         //
+		Status::where('id',$id)->delete();
     }
 }

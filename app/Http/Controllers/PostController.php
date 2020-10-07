@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -36,6 +37,9 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+		Post::create(
+		['content'=>$request->content,
+		]);
     }
 
     /**
@@ -47,6 +51,7 @@ class PostController extends Controller
     public function show($id)
     {
         //
+		$post=Post::get()->where('id',$id);
     }
 
     /**
@@ -58,6 +63,7 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+		$post=Post::where('id',$id)->first();
     }
 
     /**
@@ -70,6 +76,9 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+		Post::where('id',$id)->update(
+		['content'=>$request->content,
+		]);
     }
 
     /**
@@ -81,5 +90,6 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+		Post::where('id',$id)->delete();
     }
 }

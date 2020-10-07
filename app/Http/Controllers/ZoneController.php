@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Zone;
 
 class ZoneController extends Controller
 {
@@ -36,6 +37,9 @@ class ZoneController extends Controller
     public function store(Request $request)
     {
         //
+		Zone::create(
+		['name'=>$request->name,
+		]);
     }
 
     /**
@@ -47,6 +51,7 @@ class ZoneController extends Controller
     public function show($id)
     {
         //
+		$zone=Zone::get()->where('id',$id);
     }
 
     /**
@@ -58,6 +63,7 @@ class ZoneController extends Controller
     public function edit($id)
     {
         //
+		$zone=Zone::where('id',$id)->first();
     }
 
     /**
@@ -70,6 +76,9 @@ class ZoneController extends Controller
     public function update(Request $request, $id)
     {
         //
+		Zone::where('id',$id)->update(
+		['name'=>$request->name,
+		]);
     }
 
     /**
@@ -81,5 +90,5 @@ class ZoneController extends Controller
     public function destroy($id)
     {
         //
-    }
+		Zone::where('id',$id)->delete();    }
 }

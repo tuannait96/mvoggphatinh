@@ -102,8 +102,8 @@
                   <thead>
                   <tr>
                     <th>STT</th>
-                    <th>Mã</th>
-                    <th>Tên thành viên(s)</th>
+                    <th>Tên Thánh</th>
+                    <th>Tên thành viên</th>
                     <th>Ngày sinh</th>
                     <th>Trường học</th>
                     <th>Ngành học</th>
@@ -118,19 +118,19 @@
                       @foreach ($iddt as $i)
                         <tr>
                           <td id="stt">{{$i->id}}</td>
-                          <td id="ma">{{$i->id}}</td>
+                          <td id="ma">{{$i->holyname}}</td>
                           <td id="ten">{{$i->name}}</td>
                           <td id=ns>{{$i->dob}}</td>
-                          <td id="truong">{{$i->id}}</td>
-                          <td id="nganh">{{$i->id}}</td>
+                          <td id="truong">{{$i->school}}</td>
+                          <td id="nganh">{{$i->majors}}</td>
                           <td id="xu">{{$i->parish}}</td>
                           <td id="nam">{{$i->nameyear->name}}</td>
                           <td id="nhom">{{$i->namezone->name}}</td>
                           <td id="trangthai"><small class="badge badge-primary">{{$i->namestatus->name}}</small></td>
                           <td>
                             <a class="fa fa-eye" style="color:green; padding-right: 10%" href="{{url('dutu',$i->id)}}"></a>
-                            <i class="fa fa-edit" style="color:blue; padding-right: 10%"></i>
-                            <i class="fas fa-trash-alt" style="color:red"></i>
+							<a class="fa fa-trash-alt" style="color:green; padding-right: 10%" href="{{url('dutu/delete',$i->id)}}"></a>
+                            <i class="fas fa-edit" style="color:red"></i>
                           </td>
                         </tr>
                       @endforeach
@@ -145,8 +145,9 @@
                     <th>STT</th>
                     <th>Tên thành viên</th>
                     @foreach ($izone->first->getattend->getattend as $j)
-						<th>Tháng {{$j->time}}</th>
+						<th>T {{$j->time}}</th>
 					@endforeach
+					<th>Chức năng</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -155,7 +156,12 @@
                           <td id="stt">{{$i->id}}</td>
                           <td id="ten">{{$i->name}}</td>
 						  @foreach ($i->getattend as $j)
-							<td>{{$j->status}} {{$j->note}}</td>
+							
+							@if($j->status==1)
+								<td><input type="checkbox" checked disabled />&nbsp;</td>
+							@else
+								<td><input type="checkbox" disabled />&nbsp;</td>
+							@endif
 						  @endforeach
                           <td>
                             <i class="fa fa-eye" style="color:green; padding-right: 10%" href=""></i>

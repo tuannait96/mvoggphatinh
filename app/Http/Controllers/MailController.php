@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail;
 
 class MailController extends Controller
 {
@@ -24,7 +25,7 @@ class MailController extends Controller
      */
     public function create()
     {
-        //
+        // return form tao mail
     }
 
     /**
@@ -36,6 +37,10 @@ class MailController extends Controller
     public function store(Request $request)
     {
         //
+		Mail::create(
+		['content'=>$request->content,
+		'sentto'=>$request->sentto,
+		]);
     }
 
     /**
@@ -47,6 +52,7 @@ class MailController extends Controller
     public function show($id)
     {
         //
+		$mail=Mail::get()->where('id',$id);
     }
 
     /**
@@ -58,6 +64,7 @@ class MailController extends Controller
     public function edit($id)
     {
         //
+		$mail=Mail::where('id',$id)->fisrt();
     }
 
     /**
@@ -70,6 +77,7 @@ class MailController extends Controller
     public function update(Request $request, $id)
     {
         //
+		
     }
 
     /**

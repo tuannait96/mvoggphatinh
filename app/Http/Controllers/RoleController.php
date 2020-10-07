@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Role;
 
 class RoleController extends Controller
 {
@@ -25,6 +26,7 @@ class RoleController extends Controller
     public function create()
     {
         //
+		
     }
 
     /**
@@ -36,6 +38,9 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
+		Role::create(
+		['name'=>$request->name,
+		]);	
     }
 
     /**
@@ -47,6 +52,7 @@ class RoleController extends Controller
     public function show($id)
     {
         //
+		$role=Role::get()->where('id',$id);
     }
 
     /**
@@ -58,6 +64,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         //
+		$role=Role::where('id',$id)->first();
     }
 
     /**
@@ -70,6 +77,9 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         //
+		Role::where('id',$id)->update(
+		['name'=>$request->name,
+		]);
     }
 
     /**
@@ -81,5 +91,6 @@ class RoleController extends Controller
     public function destroy($id)
     {
         //
+		Role::where('id',$id)->delete();
     }
 }

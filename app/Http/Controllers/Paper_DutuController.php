@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\PaperDutu;
 
 class Paper_DutuController extends Controller
 {
@@ -36,6 +37,13 @@ class Paper_DutuController extends Controller
     public function store(Request $request)
     {
         //
+		PaperDutu::create(
+		['iddutu'=>$request->iddutu,
+		'idpaper'=>$request->idpaper,
+		'url'=>$request->url,
+		'status'=>$request->status,
+		]);
+		
     }
 
     /**
@@ -70,6 +78,12 @@ class Paper_DutuController extends Controller
     public function update(Request $request, $id)
     {
         //
+		PaperDutu::where('id',$id)->update(
+		['iddutu'=>$request->iddutu,
+		'idpaper'=>$request->idpaper,
+		'url'=>$request->url,
+		'status'=>$request->status,
+		]);
     }
 
     /**
@@ -81,5 +95,6 @@ class Paper_DutuController extends Controller
     public function destroy($id)
     {
         //
+		PaperDutu::where('id',$id)->delete();
     }
 }

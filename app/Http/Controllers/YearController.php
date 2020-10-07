@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Year;
 
 class YearController extends Controller
 {
@@ -36,6 +37,10 @@ class YearController extends Controller
     public function store(Request $request)
     {
         //
+		Year::create(
+		['name'=>$request->name,
+		]);
+		
     }
 
     /**
@@ -47,6 +52,7 @@ class YearController extends Controller
     public function show($id)
     {
         //
+		$year=Year::get()->where('id',$id);
     }
 
     /**
@@ -58,6 +64,7 @@ class YearController extends Controller
     public function edit($id)
     {
         //
+		$year=Year::where('id',$id)->first();
     }
 
     /**
@@ -70,6 +77,9 @@ class YearController extends Controller
     public function update(Request $request, $id)
     {
         //
+		Year::where('id',$id)->update(
+		['name'->$request->name,
+		]);
     }
 
     /**
@@ -81,5 +91,6 @@ class YearController extends Controller
     public function destroy($id)
     {
         //
+		Year::where('id',$id)->delete();
     }
 }

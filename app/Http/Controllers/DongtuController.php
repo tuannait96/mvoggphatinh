@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Dongtu;
 
 class DongtuController extends Controller
 {
@@ -24,7 +25,8 @@ class DongtuController extends Controller
      */
     public function create()
     {
-        //
+        //return về form tạo mới dòng tu
+		
     }
 
     /**
@@ -36,6 +38,10 @@ class DongtuController extends Controller
     public function store(Request $request)
     {
         //
+		Dongtu::create(
+		['name'=>$request->name,
+		'information'=>$request->infor,
+		]);
     }
 
     /**
@@ -47,6 +53,7 @@ class DongtuController extends Controller
     public function show($id)
     {
         //
+		$dongtu=Dongtu::get()->where($id);
     }
 
     /**
@@ -58,6 +65,8 @@ class DongtuController extends Controller
     public function edit($id)
     {
         //
+		$dongtu=Dongtu::where('id',$id)->first();
+		// return view
     }
 
     /**
@@ -70,6 +79,10 @@ class DongtuController extends Controller
     public function update(Request $request, $id)
     {
         //
+		Dongtu::where('id',$id)->update(
+		['name'=>$request->name,
+		'information'=>$request->infor,
+		]);
     }
 
     /**
@@ -81,5 +94,7 @@ class DongtuController extends Controller
     public function destroy($id)
     {
         //
+		Dongtu::where('id',$id)->delete();
+		
     }
 }

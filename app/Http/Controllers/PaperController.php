@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Paper;
 
 class PaperController extends Controller
 {
@@ -24,7 +25,7 @@ class PaperController extends Controller
      */
     public function create()
     {
-        //
+        //return form tao moi paper
     }
 
     /**
@@ -36,6 +37,9 @@ class PaperController extends Controller
     public function store(Request $request)
     {
         //
+		Paper:create(
+		['name'=>$request->name,
+		]);
     }
 
     /**
@@ -47,6 +51,7 @@ class PaperController extends Controller
     public function show($id)
     {
         //
+		$paper=Paper::get()->where('id',$id);
     }
 
     /**
@@ -58,6 +63,8 @@ class PaperController extends Controller
     public function edit($id)
     {
         //
+		$paper=Paper::where('id',$id)->first();
+		//return trang edit paper
     }
 
     /**
@@ -70,6 +77,8 @@ class PaperController extends Controller
     public function update(Request $request, $id)
     {
         //
+		Paper::where('id',$id)->update(
+		['name'=>$request->name,]);
     }
 
     /**
@@ -81,5 +90,6 @@ class PaperController extends Controller
     public function destroy($id)
     {
         //
+		Paper::where('id',$id)->delete();
     }
 }

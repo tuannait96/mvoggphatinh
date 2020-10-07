@@ -45,6 +45,8 @@ class Dutu extends Model
             'name' => ['required', 'string', 'max:255'],
 			'dob'=>['required','date'],
 			'parish'=>['required', 'string', 'max:255'],
+			'school'=>['required','string','max:255'],
+			'majors'=>['required','string','max:255'],
 			'idzone'=>['required', 'bigint', 'max:255'],
 			'idyear'=>['required', 'bigint', 'max:255'],
 			'idstatus'=>['required', 'bigint','max:255'],

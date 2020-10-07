@@ -39,6 +39,8 @@ class AdminController extends Controller
             'name' => 'Tuấn',
 			'dob'=>'1993-02-02',
 			'parish'=>'Khe gát',
+			'school'=>'Bách Khoa Đà Nẵng',
+			'majors'=>'Công Nghệ thông tin',
 			'idzone'=>1,
 			'idyear'=>1,
 			'idstatus'=>1
