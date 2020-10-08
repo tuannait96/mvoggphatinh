@@ -40,36 +40,10 @@ https://templatemo.com/tm-551-stand-blog
 
     <!-- Header -->
    @include('user.layout.header')
-   @include('user.layout.slide')
+   
     <!-- Page Content -->
     <!-- Banner Starts Here -->
-   
-    <!-- Banner Ends Here -->
-
-<!-- Đoạn quảng cáo
-    <section class="call-to-action">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="main-content">
-              <div class="row">
-                <div class="col-lg-8">
-                  <span>Stand Blog HTML5 Template</span>
-                  <h4>Creative HTML Template For Bloggers!</h4>
-                </div>
-                <div class="col-lg-4">
-                  <div class="main-button">
-                    <a rel="nofollow" href="https://templatemo.com/tm-551-stand-blog" target="_parent">Download Now!</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  -->
-
+   @include('user.layout.slide')
 
     <section class="blog-posts">
       <div class="container">
@@ -85,7 +59,7 @@ https://templatemo.com/tm-551-stand-blog
 
     <!-- Bootstrap core JavaScript -->
     <script src="{{asset('user_asset/assets/js/jquery.min.js')}}"></script>
-    <script src="{{asset('admin_asset/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('user_asset/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Additional Scripts -->
     <script src="{{asset('user_asset/assets/js/custom.js')}}"></script>
