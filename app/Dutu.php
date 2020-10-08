@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+//use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Validator;
 
 class Dutu extends Model
 {
@@ -38,8 +41,9 @@ class Dutu extends Model
 		return $this->hasMany('App\Attendance','iddutu','id');
 	}
 	
-	protected function validator(array $data)
+	public static function validator(array $data)
     {
+		//dd();
         return Validator::make($data, [
 			'holyname'=>['required','string','max:255'],
             'name' => ['required', 'string', 'max:255'],

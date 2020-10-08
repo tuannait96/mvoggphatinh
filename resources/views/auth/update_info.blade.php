@@ -43,10 +43,10 @@
   <div class="card">
     <div class="card-body register-card-body">
       
-      <form class="needs-validation" action="" method="post" >
+      <form class="needs-validation" action="{{url('dutu/edit',$dutu->id)}}" method="post" >
         @csrf
         <div class="input-group mb-3">
-          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Tên Thánh - họ tên" autofocus>
+          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$dutu->holyname}} {{$dutu->name}}" required autocomplete="name" placeholder="Tên Thánh - họ tên" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
@@ -62,7 +62,7 @@
          
         </div>
         <div class="input-group mb-3">
-          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="Email" required>
+          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$user->email}}" autocomplete="email" placeholder="Email" required>
          
           <div class="input-group-append">
             <div class="input-group-text">
@@ -79,7 +79,7 @@
         </div>
         <span>Ngày sinh:</span>
         <div class="input-group mb-3">
-          <input id="birthday" type="date" value="2000-01-01" id="example-date-input" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}" autocomplete="birthday" required>
+          <input id="birthday" type="date" value="{{$dutu->dob}}" id="example-date-input" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}" autocomplete="birthday" required>
          
             @error('birthday')
              <span class="invalid-feedback" role="alert">
@@ -90,7 +90,7 @@
         </div>
 
         <div class="input-group mb-3">
-          <input id="school" type="text" class="form-control @error('scholl') is-invalid @enderror" name="scholl" value="{{ old('scholl') }}" placeholder="Trường học" required autocomplete="scholl" autofocus>
+          <input id="school" type="text" class="form-control @error('scholl') is-invalid @enderror" name="scholl" value="{{$dutu->school}}" placeholder="Trường học" required autocomplete="scholl" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
@@ -107,7 +107,7 @@
         </div>
 
         <div class="input-group mb-3">
-          <input id="parish" type="text" class="form-control @error('parish') is-invalid @enderror" name="parish" value="{{ old('parish') }}" required placeholder="Giáo xứ" autocomplete="parish" autofocus>
+          <input id="parish" type="text" class="form-control @error('parish') is-invalid @enderror" name="parish" value="{{$dutu->parish}}" required placeholder="Giáo xứ" autocomplete="parish" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
@@ -124,8 +124,8 @@
         </div>
 
         <div class="input-group mb-3">
-          <select id="year" type="text" class="form-control custom-select browser-default @error('year') is-invalid @enderror" name="year" value="{{ old('year') }}" autocomplete="year" autofocus   style="width: 100%;" required>
-                    <option value="">Chọn năm sinh hoạt</option>
+          <select id="year" type="text" class="form-control custom-select browser-default @error('year') is-invalid @enderror" name="year" value="{{$dutu->nameyear->name}}" autocomplete="year" autofocus   style="width: 100%;" required>
+                    <option value="">{{$dutu->nameyear->name}}</option>
                     <option value="1">Năm 1</option>
                     <option value="2">Năm 2</option>
                     <option value="3">Năm 3</option>
@@ -145,7 +145,7 @@
         </div>
 
         <div class="input-group mb-3">
-          <select id="zone" type="text" class="form-control custom-select browser-default @error('year') is-invalid @enderror" name="zone" value="{{ old('zone') }}" autocomplete="year" autofocus   style="width: 100%;" required>
+          <select id="zone" type="text" class="form-control custom-select browser-default @error('year') is-invalid @enderror" name="zone" value="{{$dutu->namezone->name}}" autocomplete="year" autofocus   style="width: 100%;" required>
                     <option value="">Chọn nhóm sinh hoạt</option>
                     <option value="1">Nhóm 1</option>
                     <option value="2">Nhóm 2</option>

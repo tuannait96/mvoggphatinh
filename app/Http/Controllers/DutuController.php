@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Dutu;
+use Auth;
 
 class DutuController extends Controller
 {
@@ -38,6 +39,8 @@ class DutuController extends Controller
     public function store(Request $request)
     {
         //
+		dd();
+		dd(Dutu::validator($request));
 		Dutu::create(
 		['id'=>Auth::id(),
 		'holyname'=>$request->holyname,
@@ -62,11 +65,12 @@ class DutuController extends Controller
     {
 		
 		
-		
+		$user=Auth::user();
         // view thông tin của 1 dự tu
-		$dutu=Dutu::get()->where('id',$id);
+		$dutu=Dutu::get()->where('id',$id)->first();
 		//dd($dutu);
 		// trả về dự tu return view
+		return view('auth.update_info',compact('dutu','user'));
 		
     }
 
@@ -92,18 +96,23 @@ class DutuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-		Dutu::where('id',$id)->update(
-		['holyname'=>$request->holyname,
-		'name'=>$request->name,
-		'dob'=>$request->dob,
-		'parish'=>$request->parish,
-		'school'=>$request->school,
-		'majors'=>$request->majors,
-		'idzone'=>$request->idzone,
-		'idyear'=>$request->idyear,
-		'idstatus'=>$request->idstatus,
-		]);
+        //dd($request->holyname);
+		dd(Dutu::validator($request->all())->fails());
+		if(Dutu::validator($request->all())->fails())
+		{
+			Dutu::where('id',$id)->update(
+			['holyname'=>$request->holyname,
+			'name'=>$request->name,
+			'dob'=>$request->dob,
+			'parish'=>$request->parish,
+			'school'=>$request->school,
+			'majors'=>$request->majors,
+			'idzone'=>$request->idzone,
+			'idyear'=>$request->idyear,
+			'idstatus'=>$request->idstatus,
+			]);
+		}
+		
     }
 
     /**

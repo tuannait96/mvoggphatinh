@@ -25,5 +25,5 @@ Route::get('/dutu/{id}','DutuController@show')->name('show info dutu');
 Route::get('dutu/delete/{id}','DutuController@destroy')->name('delete dutu');
 Route::post('dutu/edit/{id}','DutuController@update')->name('update dutu');
 Route::post('dutu/store','DutuController@store')->name('Save dutu');
-
+Route::get('dutu/update','DutuController@update');
 //route for attdance
