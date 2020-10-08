@@ -1,15 +1,23 @@
 <header class="" style="height: auto;">
       <div class="navbar11">
-         <a href="#" style="float: right;">Đăng xuất</a>
-        <div class="dropdowni" style="float: right;">
-          <button class="dropbtn">Giuse Nguyễn Anh Tuấn 
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdowni-contenti">
-            <a href="#">Thông tin cá nhân</a>
-            <a href="#">Đổi mật khẩu</a>
-          </div>
-        </div> 
+        @if (Route::has('login'))
+          @auth
+           <a href="#" style="float: right;">Đăng xuất</a>
+          <div class="dropdowni" style="float: right;">
+            <button class="dropbtn"> 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdowni-contenti">
+              <a href="#">Thông tin cá nhân</a>
+              <a href="#">Đổi mật khẩu</a>
+            </div>
+          </div> 
+        @else
+          <a style="float: right;" href="{{ route('login') }}">Login</a>
+          @if (Route::has('register'))
+            <a href="{{ route('register') }}">Register</a>
+          @endif
+        @endif
       </div>
       <nav class="navbar navbar-expand-lg">
         <div class="container">
