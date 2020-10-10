@@ -8,6 +8,7 @@ use App\Attendance;
 use App\Role;
 use App\Dutu;
 use App\Zone;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -18,6 +19,10 @@ class AdminController extends Controller
      */
     public function index()
     {
+		if (Auth::user()->roleid!=1) {
+            //dd();
+            return '/home';
+        }
         // hàm index của admin sẽ trả về danh sách các dự tu, thống kê số lượng dự tu các nhóm hiển thị lên biểu đồ của admin
         //$iddt=Attendance::all()->pluck('user','iddutu')->where('id','1');
         $iddt=Dutu::get();
@@ -31,21 +36,6 @@ class AdminController extends Controller
 		$izone=Dutu::get();
 		//dd($izone->id);
 		//dd($izone->first->getattend->status);
-
-		//test insert dutu
-		$data=[];
-		$data=[
-			'holyname'=>'Peter',
-            'name' => 'Tuấn',
-			'dob'=>'1993-02-02',
-			'parish'=>'Khe gát',
-			'school'=>'Bách Khoa Đà Nẵng',
-			'majors'=>'Công Nghệ thông tin',
-			'idzone'=>1,
-			'idyear'=>1,
-			'idstatus'=>1
-		];
-		
         //update 1 model
         //Role::where('id', 4)->update(['name' => 'Cha Giáo']);
         return view('admin.dutu.danhsach',compact('iddt','izone'));
@@ -60,6 +50,8 @@ class AdminController extends Controller
     public function create()
     {
         //
+		dd('12122');
+		
     }
 
     /**

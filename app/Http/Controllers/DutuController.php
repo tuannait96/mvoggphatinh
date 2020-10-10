@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Dutu;
 use Auth;
+use Log;
 
 class DutuController extends Controller
 {
@@ -27,7 +28,23 @@ class DutuController extends Controller
      */
     public function create()
     {
-        // return ve form tạo mới đự tu
+		$id=Auth::user()->roleid;
+		if($id==1)
+		{
+			dd('Bạn không có quyền tạo mới Dự tu!!!');
+		}
+		else
+		{
+			//
+			if(Dutu::get('id',$id)->count()!=1)
+			{
+				$error;
+				$user=Auth::user();
+				$dutu=Dutu::get()->where('id',$id)->first();
+				return view('auth.update_info',compact('error','dutu','user'));
+			}
+			return view('auth.create');
+		}
     }
 
     /**
@@ -39,20 +56,44 @@ class DutuController extends Controller
     public function store(Request $request)
     {
         //
-		dd();
-		dd(Dutu::validator($request));
-		Dutu::create(
-		['id'=>Auth::id(),
-		'holyname'=>$request->holyname,
-		'name'=>$request->name,
-		'dob'=>$request->dob,
-		'parish'=>$request->parish,
-		'school'=>$request->school,
-		'majors'=>$request->majors,
-		'idzone'=>$request->idzone,
-		'idyear'=>$request->idyear,
-		'idstatus'=>$request->idstatus,
-		]);
+		if(Auth::user()->roleid==1)
+		{
+			dd('Không tạo mới được Dự tu');
+		}
+		else
+		{
+			$request->idstatus=2;
+			if(Dutu::validator($request->all())->fails())
+			{
+				dd('fails');
+			}
+			else
+			{
+				try{
+					dd(Auth::id());
+					Dutu::create(
+					['id'=>Auth::id(),
+					'holyname'=>$request->holyname,
+					'name'=>$request->name,
+					'dob'=>$request->dob,
+					'parish'=>$request->parish,
+					'school'=>$request->school,
+					'majors'=>$request->majors,
+					'idzone'=>$request->idzone,
+					'idyear'=>$request->idyear,
+					'idstatus'=>$request->idstatus,
+					]);
+					return('home');
+				}
+				catch(\Exception $e)
+				{
+					dd(($e));
+				}
+			}
+		}
+		
+		
+		
     }
 
     /**
@@ -96,9 +137,27 @@ class DutuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request->holyname);
-		dd(Dutu::validator($request->all())->fails());
+		dd('hahaha');
+		if(Auth::user()->roleid==1)
+		{
+			$request->idstatus = 1;
+		}
+		else
+		{
+			$request->idstatus = 2;		
+		}
+		$user=Auth::user();
+		$dutu=Dutu::get()->where('id',$id)->first();
+		
+		$vali=Dutu::validator($request->all());
+		//dd($vali->errors());
 		if(Dutu::validator($request->all())->fails())
+		{
+			$error=$vali->errors();
+			dd($error);
+			return view('auth.update_info',compact('error','dutu','user'));
+		}
+		else
 		{
 			Dutu::where('id',$id)->update(
 			['holyname'=>$request->holyname,
@@ -125,5 +184,6 @@ class DutuController extends Controller
     {
         //
 		Dutu::where('id',$id)->delete();
+		return redirect()->url('admin');
     }
 }

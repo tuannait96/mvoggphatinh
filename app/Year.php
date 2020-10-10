@@ -12,4 +12,12 @@ class Year extends Model
         'id','name',
     ];
     //
+	
+	public static function validator(array $data)
+    {
+		//dd($data);
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+			]);
+    }	
 }

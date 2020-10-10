@@ -32,19 +32,30 @@ class LoginController extends Controller
     //function direct affter login
     protected function redirectTo()
     {
-		//dd(Dutu::get()->where(Auth::user()->id));
+		$id=Auth::user()->roleid;
         if (Auth::user()->roleid==1) {
             //dd();
             return '/admin';
         }
 		else
 		{
+			return '/home';
 			if(Dutu::get()->where(Auth::user()->id)->count()==0)
 			{
-				dd();
-				//update information...
+				
+				//$error;
+				$user=Auth::user();
+				$dutu=Dutu::get()->where('id',$id)->first();
+				//return '/home';
+				//return ('/dutu/update');
+				//return view('auth.update_info',compact('dutu','user'));
+				return ('/dutu/update')->with(['dutu' => $dutu,'user' => $user]);
 			}
-			return '/home';
+			else
+			{
+				return '/home';
+			}
+			
 		}
     }
 

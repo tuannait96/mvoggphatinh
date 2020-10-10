@@ -12,4 +12,11 @@ class Post extends Model
         'id','content',
     ];
     //
+	public static function validator(array $data)
+    {
+		//dd($data);
+        return Validator::make($data, [
+			'content' => ['required','string'],
+        ]);
+    }	
 }
