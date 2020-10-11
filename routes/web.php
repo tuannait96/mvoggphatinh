@@ -30,6 +30,7 @@ Route::post('dutu/store','DutuController@store')->name('save.dutu');
 Route::get('dutu/edit/{id}','DutuController@edit')->name('getupdate.dutu');
 
 //route for attdance
+Route::get('attdance','AttendanceController@index');
 Route::get('/attdance/create','AttendanceController@create')->name('create.attdance')->middleware('auth');
 Route::get('/attdance/{id}','AttendanceController@show')->name('show.attdance')->middleware('auth');
 Route::get('attdance/delete/{id}','AttendanceController@destroy')->name('delete.attdance');
