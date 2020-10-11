@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Dutu;
 use Auth;
-use Log;
+use Redirect;
+
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class DutuController extends Controller
 {
@@ -28,22 +31,24 @@ class DutuController extends Controller
      */
     public function create()
     {
-		$id=Auth::user()->roleid;
-		if($id==1)
+		$id= Auth::user()->id;
+		$email = Auth::user()->email;
+		$name = Auth::user()->name;
+		$role = Auth::user()->roleid;
+		if($role==1)
 		{
-			dd('Bạn không có quyền tạo mới Dự tu!!!');
+			dd('Vào đây làm gì, hãy để dự tu tự tạo dự tu!!!');
 		}
 		else
 		{
-			//
-			if(Dutu::get('id',$id)->count()!=1)
+			if(Dutu::all()->where('id',$id)->count()==1)
 			{
-				$error;
-				$user=Auth::user();
-				$dutu=Dutu::get()->where('id',$id)->first();
-				return view('auth.update_info',compact('error','dutu','user'));
+				return redirect()->route('getupdate.dutu',$id);
 			}
-			return view('auth.create');
+			else
+			{
+				return view('auth.create',compact('email','name'));
+			}
 		}
     }
 
@@ -65,14 +70,16 @@ class DutuController extends Controller
 			$request->idstatus=2;
 			if(Dutu::validator($request->all())->fails())
 			{
-				dd('fails');
+				//dd(Dutu::validator($request->all())->errors());
+				$vali=Dutu::validator($request->all());
+				//dd($vali->errors());
+				return Redirect::back()->withErrors($vali);
 			}
 			else
 			{
 				try{
-					dd(Auth::id());
 					Dutu::create(
-					['id'=>Auth::id(),
+					['id' => Auth::id(),
 					'holyname'=>$request->holyname,
 					'name'=>$request->name,
 					'dob'=>$request->dob,
@@ -83,10 +90,11 @@ class DutuController extends Controller
 					'idyear'=>$request->idyear,
 					'idstatus'=>$request->idstatus,
 					]);
-					return('home');
+					return redirect()->route('home');
 				}
 				catch(\Exception $e)
 				{
+					//return Redirect::back()->withErrors($e->all);
 					dd(($e));
 				}
 			}
@@ -104,13 +112,16 @@ class DutuController extends Controller
      */
     public function show($id)
     {
-		
-		
+		if($id!=Auth::id())
+		{
+			return 'Không có quyền xem thông tin user khác mô bạn ơi!!!';
+		}
 		$user=Auth::user();
-        // view thông tin của 1 dự tu
 		$dutu=Dutu::get()->where('id',$id)->first();
-		//dd($dutu);
-		// trả về dự tu return view
+		if(is_null($dutu))
+		{
+			return 'Không có thông tin dự tu này trong cơ sở dữ liệu';
+		}
 		return view('auth.update_info',compact('dutu','user'));
 		
     }
@@ -123,9 +134,20 @@ class DutuController extends Controller
      */
     public function edit($id)
     {
-        //
-		$dutu=Dutu::where('id',$id)->first();
-		//return view
+		$role = Auth::user()->roleid;
+		if($role==1)
+		{
+			return Redirect::back();
+		}
+		$user=Auth::user();
+		$dutu=Dutu::all()->where('id',$id)->first();
+		if(is_null($dutu))
+		{
+			return redirect()->route('home');
+		}
+		else{
+			return view('auth.update_info',compact('dutu','user'));
+		}
     }
 
     /**
@@ -137,7 +159,7 @@ class DutuController extends Controller
      */
     public function update(Request $request, $id)
     {
-		dd('hahaha');
+		
 		if(Auth::user()->roleid==1)
 		{
 			$request->idstatus = 1;
@@ -146,16 +168,12 @@ class DutuController extends Controller
 		{
 			$request->idstatus = 2;		
 		}
-		$user=Auth::user();
-		$dutu=Dutu::get()->where('id',$id)->first();
-		
+		//$user=Auth::user();
+		//$dutu=Dutu::get()->where('id',$id)->first();
 		$vali=Dutu::validator($request->all());
-		//dd($vali->errors());
 		if(Dutu::validator($request->all())->fails())
 		{
-			$error=$vali->errors();
-			dd($error);
-			return view('auth.update_info',compact('error','dutu','user'));
+			return Redirect::back()->withErrors($vali);
 		}
 		else
 		{
@@ -170,6 +188,7 @@ class DutuController extends Controller
 			'idyear'=>$request->idyear,
 			'idstatus'=>$request->idstatus,
 			]);
+			return redirect()->route('home');
 		}
 		
     }
@@ -184,6 +203,7 @@ class DutuController extends Controller
     {
         //
 		Dutu::where('id',$id)->delete();
-		return redirect()->url('admin');
+		return Redirect::back();
+		return redirect()->route('admin');
     }
 }

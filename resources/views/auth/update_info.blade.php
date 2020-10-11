@@ -45,8 +45,26 @@
       
       <form class="needs-validation" action="{{url('dutu/edit',$dutu->id)}}" method="post" >
         @csrf
+		
+		<div class="input-group mb-3">
+          <input id="holyname" type="text" class="form-control @error('name') is-invalid @enderror" name="holyname" value="{{$dutu->holyname}}"  autocomplete="name" placeholder="" autofocus>
+          
+          <div class="input-group-append ">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          
+            @error('holyname')
+             <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+             </span>
+           @enderror
+         
+        </div>
+		
         <div class="input-group mb-3">
-          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$dutu->holyname}} {{$dutu->name}}" required autocomplete="name" placeholder="Tên Thánh - họ tên" autofocus>
+          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$dutu->name}}" required autocomplete="name" placeholder="Tên Thánh - họ tên" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
@@ -62,22 +80,7 @@
          
         </div>
 		
-		<div class="input-group mb-3">
-          <input id="holyname" type="text" class="form-control @error('name') is-invalid @enderror" name="holyname" value="{{$dutu->holyname}} {{$dutu->name}}"  autocomplete="name" placeholder="" autofocus>
-          
-          <div class="input-group-append ">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-          
-            @error('holyname')
-             <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
-             </span>
-           @enderror
-         
-        </div>
+		
 		
         <div class="input-group mb-3">
           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$user->email}}" autocomplete="email" placeholder="Email" required>
@@ -99,11 +102,15 @@
         <div class="input-group mb-3">
           <input id="birthday" type="date" value="{{$dutu->dob}}" id="example-date-input" class="form-control @error('birthday') is-invalid @enderror" name="dob" value="{{ old('dob') }}" autocomplete="birthday" required>
          
-            @error('birthday')
+            @error('dob')
              <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
+              <strong>{{ $message}}</strong>
              </span>
            @enderror
+		   @if($errors->any())
+				{{ implode('', $errors->all('<div>:message</div>')) }}
+		   @endif
+		   
          
         </div>
 

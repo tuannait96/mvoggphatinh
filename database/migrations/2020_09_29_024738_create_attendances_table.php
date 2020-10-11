@@ -19,8 +19,9 @@ class CreateAttendancesTable extends Migration
             $table->date('time');
             $table->integer('status');
             $table->string('note');
-            $table->foreign('iddutu')->references('id')->on('dutus');
+            $table->foreign('iddutu')->references('id')->on('dutus')->constrained()->onDelete('cascade');
             $table->timestamps();
+			//$table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 

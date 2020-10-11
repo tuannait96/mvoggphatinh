@@ -37,7 +37,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="#"><b>Xin hoàn tất thông tin cá nhân chính xác và chờ sự xác nhận của Linh mục phụ trách</a>
+  <h3>Xin hoàn tất thông tin cá nhân chính xác và chờ sự xác nhận của Linh mục phụ trách</h3>
   </div>
 
   <div class="card">
@@ -45,22 +45,7 @@
       
       <form class="needs-validation" action="{{url('dutu/store')}}" method="post" >
         @csrf
-        <div class="input-group mb-3">
-          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="" required autocomplete="name" placeholder="Họ tên" autofocus>
-          
-          <div class="input-group-append ">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-          
-            @error('name')
-             <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
-             </span>
-           @enderror
-         
-        </div>
+        
 		
 		<div class="input-group mb-3">
           <input id="holyname" type="text" class="form-control @error('name') is-invalid @enderror" name="holyname" value=""  autocomplete="name" placeholder="Tên Thánh" autofocus>
@@ -79,8 +64,25 @@
          
         </div>
 		
+		<div class="input-group mb-3">
+          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$name}}" required autocomplete="name" placeholder="Họ tên" autofocus>
+          
+          <div class="input-group-append ">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          
+            @error('name')
+             <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+             </span>
+           @enderror
+         
+        </div>
+		
         <div class="input-group mb-3">
-          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="" autocomplete="email" placeholder="Email" required>
+          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$email}}" autocomplete="email" placeholder="Email" required>
          
           <div class="input-group-append">
             <div class="input-group-text">
@@ -98,8 +100,8 @@
         <span>Ngày sinh:</span>
         <div class="input-group mb-3">
           <input id="birthday" type="date" value="" id="example-date-input" class="form-control @error('birthday') is-invalid @enderror" name="dob" value="{{ old('dob') }}" autocomplete="birthday" required>
-         
-            @error('birthday')
+
+            @error('dob')
              <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
              </span>

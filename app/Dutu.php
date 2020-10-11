@@ -46,7 +46,7 @@ class Dutu extends Model
         return Validator::make($data, [
 			'holyname' => ['required','string','max:255'],
             'name' => ['required', 'string', 'max:255'],
-			'dob' => ['required','date'],
+			'dob' => ['required','date','after:01-01-1900','before:30-12-3000'],
 			'parish' => ['required', 'string', 'max:255'],
 			'school' => ['required','string','max:255'],
 			'majors' => ['required','string','max:255'],
