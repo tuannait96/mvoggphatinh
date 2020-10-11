@@ -30,3 +30,6 @@ Route::get('/user', function () {
 Route::get('/udinf', function () {
     return view('auth/update_info');
 });
+Route::get('/attend', function () {
+    return view('user/attend');
+});

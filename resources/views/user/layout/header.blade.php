@@ -1,23 +1,26 @@
 <header class="" style="height: auto;">
       <div class="navbar11">
-        @if (Route::has('login'))
           @auth
-           <a href="#" style="float: right;">Đăng xuất</a>
+           <a href="{{ route('logout') }}" style="float: right; " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
+           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
           <div class="dropdowni" style="float: right;">
-            <button class="dropbtn"> 
-              <i class="fa fa-caret-down"></i>
+            <button class="dropbtn"> {{ Auth::user()->name }}
+              <i class="fa fa-caret-down"> </i>
             </button>
             <div class="dropdowni-contenti">
               <a href="#">Thông tin cá nhân</a>
               <a href="#">Đổi mật khẩu</a>
             </div>
           </div> 
-        @else
+         @endauth
+        
+         @guest
           <a style="float: right;" href="{{ route('login') }}">Login</a>
-          @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
-          @endif
-        @endif
+            
+                <a style="float: right;" href="{{ route('register') }}">Register</a>
+          @endguest
+        
+       
       </div>
       <nav class="navbar navbar-expand-lg">
         <div class="container">
@@ -50,3 +53,4 @@
         </div>
       </nav>
  </header>
+ 
