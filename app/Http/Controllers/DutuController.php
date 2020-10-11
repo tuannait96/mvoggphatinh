@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Dutu;
+use Auth;
+use Redirect;
+
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class DutuController extends Controller
 {
@@ -26,7 +31,25 @@ class DutuController extends Controller
      */
     public function create()
     {
-        // return ve form tạo mới đự tu
+		$id= Auth::user()->id;
+		$email = Auth::user()->email;
+		$name = Auth::user()->name;
+		$role = Auth::user()->roleid;
+		if($role==1)
+		{
+			dd('Vào đây làm gì, hãy để dự tu tự tạo dự tu!!!');
+		}
+		else
+		{
+			if(Dutu::all()->where('id',$id)->count()==1)
+			{
+				return redirect()->route('getupdate.dutu',$id);
+			}
+			else
+			{
+				return view('auth.create',compact('email','name'));
+			}
+		}
     }
 
     /**
@@ -38,18 +61,47 @@ class DutuController extends Controller
     public function store(Request $request)
     {
         //
-		Dutu::create(
-		['id'=>Auth::id(),
-		'holyname'=>$request->holyname,
-		'name'=>$request->name,
-		'dob'=>$request->dob,
-		'parish'=>$request->parish,
-		'school'=>$request->school,
-		'majors'=>$request->majors,
-		'idzone'=>$request->idzone,
-		'idyear'=>$request->idyear,
-		'idstatus'=>$request->idstatus,
-		]);
+		if(Auth::user()->roleid==1)
+		{
+			dd('Không tạo mới được Dự tu');
+		}
+		else
+		{
+			$request->idstatus=2;
+			if(Dutu::validator($request->all())->fails())
+			{
+				//dd(Dutu::validator($request->all())->errors());
+				$vali=Dutu::validator($request->all());
+				//dd($vali->errors());
+				return Redirect::back()->withErrors($vali);
+			}
+			else
+			{
+				try{
+					Dutu::create(
+					['id' => Auth::id(),
+					'holyname'=>$request->holyname,
+					'name'=>$request->name,
+					'dob'=>$request->dob,
+					'parish'=>$request->parish,
+					'school'=>$request->school,
+					'majors'=>$request->majors,
+					'idzone'=>$request->idzone,
+					'idyear'=>$request->idyear,
+					'idstatus'=>$request->idstatus,
+					]);
+					return redirect()->route('home');
+				}
+				catch(\Exception $e)
+				{
+					//return Redirect::back()->withErrors($e->all);
+					dd(($e));
+				}
+			}
+		}
+		
+		
+		
     }
 
     /**
@@ -60,13 +112,17 @@ class DutuController extends Controller
      */
     public function show($id)
     {
-		
-		
-		
-        // view thông tin của 1 dự tu
-		$dutu=Dutu::get()->where('id',$id);
-		//dd($dutu);
-		// trả về dự tu return view
+		if($id!=Auth::id())
+		{
+			return 'Không có quyền xem thông tin user khác mô bạn ơi!!!';
+		}
+		$user=Auth::user();
+		$dutu=Dutu::get()->where('id',$id)->first();
+		if(is_null($dutu))
+		{
+			return 'Không có thông tin dự tu này trong cơ sở dữ liệu';
+		}
+		return view('auth.update_info',compact('dutu','user'));
 		
     }
 
@@ -78,9 +134,20 @@ class DutuController extends Controller
      */
     public function edit($id)
     {
-        //
-		$dutu=Dutu::where('id',$id)->first();
-		//return view
+		$role = Auth::user()->roleid;
+		if($role==1)
+		{
+			return Redirect::back();
+		}
+		$user=Auth::user();
+		$dutu=Dutu::all()->where('id',$id)->first();
+		if(is_null($dutu))
+		{
+			return redirect()->route('home');
+		}
+		else{
+			return view('auth.update_info',compact('dutu','user'));
+		}
     }
 
     /**
@@ -92,18 +159,38 @@ class DutuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-		Dutu::where('id',$id)->update(
-		['holyname'=>$request->holyname,
-		'name'=>$request->name,
-		'dob'=>$request->dob,
-		'parish'=>$request->parish,
-		'school'=>$request->school,
-		'majors'=>$request->majors,
-		'idzone'=>$request->idzone,
-		'idyear'=>$request->idyear,
-		'idstatus'=>$request->idstatus,
-		]);
+		
+		if(Auth::user()->roleid==1)
+		{
+			$request->idstatus = 1;
+		}
+		else
+		{
+			$request->idstatus = 2;		
+		}
+		//$user=Auth::user();
+		//$dutu=Dutu::get()->where('id',$id)->first();
+		$vali=Dutu::validator($request->all());
+		if(Dutu::validator($request->all())->fails())
+		{
+			return Redirect::back()->withErrors($vali);
+		}
+		else
+		{
+			Dutu::where('id',$id)->update(
+			['holyname'=>$request->holyname,
+			'name'=>$request->name,
+			'dob'=>$request->dob,
+			'parish'=>$request->parish,
+			'school'=>$request->school,
+			'majors'=>$request->majors,
+			'idzone'=>$request->idzone,
+			'idyear'=>$request->idyear,
+			'idstatus'=>$request->idstatus,
+			]);
+			return redirect()->route('home');
+		}
+		
     }
 
     /**
@@ -116,5 +203,7 @@ class DutuController extends Controller
     {
         //
 		Dutu::where('id',$id)->delete();
+		return Redirect::back();
+		return redirect()->route('admin');
     }
 }

@@ -12,4 +12,13 @@ class Mail extends Model
         'id','content','sentto',
     ];
     //
+	
+	public static function validator(array $data)
+    {
+		//dd($data);
+        return Validator::make($data, [
+			'content' => ['required','string'],
+            'sentto' => ['required', 'string'],
+        ]);
+    }	
 }

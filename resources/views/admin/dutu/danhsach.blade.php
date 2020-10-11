@@ -129,49 +129,54 @@
                           <td id="trangthai"><small class="badge badge-primary">{{$i->namestatus->name}}</small></td>
                           <td>
                             <a class="fa fa-eye" style="color:green; padding-right: 10%" href="{{url('dutu',$i->id)}}"></a>
-							<a class="fa fa-trash-alt" style="color:green; padding-right: 10%" href="{{url('dutu/delete',$i->id)}}"></a>
+							<a class="fa fa-trash-alt" style="color:green; padding-right: 10%" href="{{url('dutu/delete',$i->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa Dự tu này không?');" title="Xóa"></a>
                             <i class="fas fa-edit" style="color:red"></i>
                           </td>
                         </tr>
                       @endforeach
                   </tbody>
                 </table>
-				
+
+				@if (is_null($izone->first->getattend))
+					<h3 class="card-title" id="addnhom_title">Chưa có số liệu thống kê!!!</h3>
+				@else
+					<table id="example1" class="table table-bordered table-striped">
+					  <thead>
+					  <tr>
+						<th>STT</th>
+						<th>Tên thành viên</th>
+						@foreach ($izone->first->getattend->getattend as $j)
+							<th>T {{$j->time}}</th>
+						@endforeach
+						<th>Chức năng</th>
+					  </tr>
+					  </thead>
+					  <tbody>
+						  @foreach ($izone as $i)
+							<tr>
+							  <td id="stt">{{$i->id}}</td>
+							  <td id="ten">{{$i->name}}</td>
+							  @foreach ($i->getattend as $j)
+								
+								@if($j->status==1)
+									<td><input type="checkbox" checked disabled />&nbsp;</td>
+								@else
+									<td><input type="checkbox" disabled />&nbsp;</td>
+								@endif
+							  @endforeach
+							  <td>
+								<i class="fa fa-eye" style="color:green; padding-right: 10%" href=""></i>
+								<i class="fa fa-edit" style="color:blue; padding-right: 10%"></i>
+								<i class="fas fa-trash-alt" style="color:red"></i>
+							  </td>
+							</tr>
+						  @endforeach
+					  </tbody>
+					</table>
+				@endif
 
 				<!-- test thống kê điểm danh-->
-				<table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>STT</th>
-                    <th>Tên thành viên</th>
-                    @foreach ($izone->first->getattend->getattend as $j)
-						<th>T {{$j->time}}</th>
-					@endforeach
-					<th>Chức năng</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                      @foreach ($izone as $i)
-                        <tr>
-                          <td id="stt">{{$i->id}}</td>
-                          <td id="ten">{{$i->name}}</td>
-						  @foreach ($i->getattend as $j)
-							
-							@if($j->status==1)
-								<td><input type="checkbox" checked disabled />&nbsp;</td>
-							@else
-								<td><input type="checkbox" disabled />&nbsp;</td>
-							@endif
-						  @endforeach
-                          <td>
-                            <i class="fa fa-eye" style="color:green; padding-right: 10%" href=""></i>
-                            <i class="fa fa-edit" style="color:blue; padding-right: 10%"></i>
-                            <i class="fas fa-trash-alt" style="color:red"></i>
-                          </td>
-                        </tr>
-                      @endforeach
-                  </tbody>
-                </table>
+				
 				
 				<!-- Kết thúc test-->
 				

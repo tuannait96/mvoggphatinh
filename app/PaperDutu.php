@@ -12,4 +12,14 @@ class PaperDutu extends Model
         'id','iddutu','idpaper','url','status',
     ];
     //
+	
+	public static function validator(array $data)
+    {
+		//dd($data);
+        return Validator::make($data, [
+			'iddutu' => ['required','int'],
+            'idpaper' => ['required', 'int'],
+			'url' => ['required', 'string', 'max:255'],
+        ]);
+    }	
 }

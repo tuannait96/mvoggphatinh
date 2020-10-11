@@ -38,7 +38,10 @@ class RegisterController extends Controller
         if (Auth::user()->roleid==1) {
             return '/admin';
         }
-        return '/home';
+        else
+		{
+			return '/dutu/create';
+		}
     }
 
     /**
@@ -77,7 +80,7 @@ class RegisterController extends Controller
 		if (User::all()->count()==0)
 			$ro=1;
 		else
-			$ro=2;
+			$ro=3;
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

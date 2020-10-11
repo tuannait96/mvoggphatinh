@@ -12,6 +12,15 @@ class Zone extends Model
         'id','name',
     ];
     //
+	
+	public static function validator(array $data)
+    {
+		//dd($data);
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+			]);
+    }	
+	
 	/**
      * Get the Zone for the Dutu.
      */

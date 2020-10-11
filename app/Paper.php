@@ -12,4 +12,11 @@ class Paper extends Model
         'id','time',
     ];
     //
+	public static function validator(array $data)
+    {
+		//dd($data);
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+    }	
 }
