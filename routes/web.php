@@ -37,3 +37,7 @@ Route::get('attdance/delete/{id}','AttendanceController@destroy')->name('delete.
 Route::post('attdance/edit/{id}','AttendanceController@update')->name('update.attdance');
 Route::post('attdance/store','AttendanceController@store')->name('save.attdance');
 Route::get('attdance/edit/{id}','AttendanceController@edit')->name('getupdate.attdance');
+
+Route::get('attend', function () {
+    return view('user.attend');
+});

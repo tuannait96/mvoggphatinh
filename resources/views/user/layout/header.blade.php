@@ -1,15 +1,26 @@
 <header class="" style="height: auto;">
       <div class="navbar11">
-         <a href="#" style="float: right;">Đăng xuất</a>
-        <div class="dropdowni" style="float: right;">
-          <button class="dropbtn">Giuse Nguyễn Anh Tuấn 
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdowni-contenti">
-            <a href="#">Thông tin cá nhân</a>
-            <a href="#">Đổi mật khẩu</a>
-          </div>
-        </div> 
+          @auth
+           <a href="{{ route('logout') }}" style="float: right; " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
+           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
+          <div class="dropdowni" style="float: right;">
+            <button class="dropbtn"> {{ Auth::user()->name }}
+              <i class="fa fa-caret-down"> </i>
+            </button>
+            <div class="dropdowni-contenti">
+              <a href="#">Thông tin cá nhân</a>
+              <a href="#">Đổi mật khẩu</a>
+            </div>
+          </div> 
+         @endauth
+        
+         @guest
+          <a style="float: right;" href="{{ route('login') }}">Login</a>
+            
+                <a style="float: right;" href="{{ route('register') }}">Register</a>
+          @endguest
+        
+       
       </div>
       <nav class="navbar navbar-expand-lg">
         <div class="container">
@@ -39,6 +50,6 @@
 
             </ul>
           </div>
-      </div>
-    </nav>
+        </div>
+      </nav>
  </header>

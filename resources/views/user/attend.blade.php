@@ -1,24 +1,24 @@
 @extends('user.layout.layout')
 @section('content')
  <div class="col-lg-9">
- 	<div class="header-attend">
- 		<h3><b>Điểm danh nhóm Đà Nẵng</b></h3>
- 		<h4 style="padding:15px;">Trưởng nhóm: Giuse Nguyễn Anh Tuấn</h4>
- 		<select aria-label="Tháng" name="month" id="month" title="Tháng" class="sl_at">
- 			<option value="0">Tháng</option>
- 			@for($i=1; $i<=12; $i++)
-	 				<option @if($i==date("m")) selected @endif value="@if($i<10)0{{$i}}@else{{$i}}@endif">Tháng {{$i}}</option>
- 			@endfor
- 		</select> 
- 		<!-- select năm -->
- 		<select aria-label="Năm" name="year" id="year" title="Năm" class="sl_at">
- 			<option value="0">Năm</option>
- 			@for($i=2019; $i<=date("Y"); $i++)
- 			<option @if($i==date("Y")) selected @endif value="{{$i}}">{{$i}}</option>
- 			@endfor
- 		</select>
- 	</div>
- 	<div class="card">
+  <div class="header-attend">
+    <h3><b>Điểm danh nhóm Đà Nẵng</b></h3>
+    <h4 style="padding:15px;">Trưởng nhóm: Giuse Nguyễn Anh Tuấn</h4>
+    <select aria-label="Tháng" name="month" id="month" title="Tháng" class="sl_at">
+      <option value="0">Tháng</option>
+      @for($i=1; $i<=12; $i++)
+          <option @if($i==date("m")) selected @endif value="@if($i<10)0{{$i}}@else{{$i}}@endif">Tháng {{$i}}</option>
+      @endfor
+    </select>
+    <!-- select năm -->
+    <select aria-label="Năm" name="year" id="year" title="Năm" class="sl_at">
+      <option value="0">Năm</option>
+      @for($i=2019; $i<=date("Y"); $i++)
+      <option @if($i==date("Y")) selected @endif value="{{$i}}">{{$i}}</option>
+      @endfor
+    </select>
+  </div>
+  <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Danh sách điểm danh</h3>
 
