@@ -30,10 +30,10 @@ Route::post('dutu/store','DutuController@store')->name('save.dutu');
 Route::get('dutu/edit/{id}','DutuController@edit')->name('getupdate.dutu');
 
 //route for attdance
-Route::get('attdance','AttendanceController@index');
-Route::get('/attdance/create','AttendanceController@create')->name('create.attdance')->middleware('auth');
-Route::get('/attdance/{id}','AttendanceController@show')->name('show.attdance')->middleware('auth');
-Route::get('attdance/delete/{id}','AttendanceController@destroy')->name('delete.attdance');
-Route::post('attdance/edit/{id}','AttendanceController@update')->name('update.attdance');
-Route::post('attdance/store','AttendanceController@store')->name('save.attdance');
-Route::get('attdance/edit/{id}','AttendanceController@edit')->name('getupdate.attdance');
+Route::get('attend','AttendanceController@index');
+Route::get('/attend/create','AttendanceController@create')->name('create.attend')->middleware('auth');
+Route::get('/attend/{id}','AttendanceController@show')->name('show.attend')->middleware('auth');
+Route::get('attend/delete/{id}','AttendanceController@destroy')->name('delete.attend');
+Route::post('attend/edit/{id}','AttendanceController@update')->name('update.attend');
+Route::post('attend/store','AttendanceController@store')->name('save.attend');
+Route::get('attend/edit/{id}','AttendanceController@edit')->name('getupdate.attend');

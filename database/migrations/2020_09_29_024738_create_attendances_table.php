@@ -16,7 +16,8 @@ class CreateAttendancesTable extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('iddutu');
-            $table->date('time');
+            $table->string('month');
+            $table->string('year');
             $table->integer('status');
             $table->string('note');
             $table->foreign('iddutu')->references('id')->on('dutus')->constrained()->onDelete('cascade');

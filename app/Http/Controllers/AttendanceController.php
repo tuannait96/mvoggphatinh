@@ -15,6 +15,7 @@ class AttendanceController extends Controller
     public function index()
     {
         //
+        return view('user.attend');
     }
 
     /**
@@ -35,7 +36,37 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
+        dd();
         //
+        if(Auth::user()->roleid!=1||Auth::user()->roleid!=2)
+        {
+            dd('Bạn không có quyền điểm danh');
+        }
+        else
+        {
+            $data = json_decode($request->data, true);
+            dd($data);
+            if(Attendance::validator($request->all()->fails()))
+            {
+                return Redirect::back();
+            }
+            else
+            {
+                try {
+                    Attendance::create(
+                        ['iddutu' => $request->iddutu,
+                        'month' => $request->month,
+                        'year' => $request->year,
+                        'status' => $request->status,
+                        'note' => $request->note,
+                        ]);
+                    return redirect()->route('home');
+                    
+                } catch (Exception $e) {
+                    
+                }
+            }
+        }
     }
 
     /**
