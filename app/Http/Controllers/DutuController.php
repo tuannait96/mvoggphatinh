@@ -94,8 +94,8 @@ class DutuController extends Controller
 				}
 				catch(\Exception $e)
 				{
-					//return Redirect::back()->withErrors($e->all);
-					dd(($e));
+					return Redirect::back()->withErrors($e->getMessage());
+					dd(($e->getMessage()));
 				}
 			}
 		}
@@ -177,7 +177,26 @@ class DutuController extends Controller
 		}
 		else
 		{
-			Dutu::where('id',$id)->update(
+			try {
+				Dutu::where('id',$id)->update(
+					['holyname'=>$request->holyname,
+					'name'=>$request->name,
+					'dob'=>$request->dob,
+					'parish'=>$request->parish,
+					'school'=>$request->school,
+					'majors'=>$request->majors,
+					'idzone'=>$request->idzone,
+					'idyear'=>$request->idyear,
+					'idstatus'=>$request->idstatus,
+					]);
+					return redirect()->route('home');
+			} catch (\Exception $e) {
+				dd($e->getMessage());
+				return Redirect::back();
+			}
+
+
+			/*Dutu::where('id',$id)->update(
 			['holyname'=>$request->holyname,
 			'name'=>$request->name,
 			'dob'=>$request->dob,
@@ -189,6 +208,7 @@ class DutuController extends Controller
 			'idstatus'=>$request->idstatus,
 			]);
 			return redirect()->route('home');
+			*/
 		}
 		
     }
@@ -201,8 +221,12 @@ class DutuController extends Controller
      */
     public function destroy($id)
     {
-        //
-		Dutu::where('id',$id)->delete();
+        
+        if(Auth::user()->roleid!=1)
+        {
+        	return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        Dutu::where('id',$id)->delete();
 		return Redirect::back();
 		return redirect()->route('admin');
     }
