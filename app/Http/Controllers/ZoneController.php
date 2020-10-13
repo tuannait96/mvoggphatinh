@@ -90,5 +90,11 @@ class ZoneController extends Controller
     public function destroy($id)
     {
         //
-		Zone::where('id',$id)->delete();    }
+        if(Auth::user()->roleid!=1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+		Zone::where('id',$id)->delete();    
+        return Redirect::back();
+    }
 }

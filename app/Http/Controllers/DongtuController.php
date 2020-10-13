@@ -53,7 +53,7 @@ class DongtuController extends Controller
     public function show($id)
     {
         //
-		$dongtu=Dongtu::get()->where($id);
+		$dongtu=Dongtu::where('id',$id)->first();
     }
 
     /**
@@ -94,7 +94,11 @@ class DongtuController extends Controller
     public function destroy($id)
     {
         //
+        if(Auth::user()->roleid!=1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
 		Dongtu::where('id',$id)->delete();
-		
+		return Redirect::back();
     }
 }
