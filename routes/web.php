@@ -30,7 +30,7 @@ Route::post('dutu/store','DutuController@store')->name('save.dutu');
 Route::get('dutu/edit/{id}','DutuController@edit')->name('getupdate.dutu');
 
 //route for attdance
-Route::get('attend','AttendanceController@index');
+Route::get('attend','AttendanceController@index')->middleware('auth');
 Route::get('/attend/create','AttendanceController@create')->name('create.attend')->middleware('auth');
 Route::get('/attend/{id}','AttendanceController@show')->name('show.attend')->middleware('auth');
 Route::get('attend/delete/{id}','AttendanceController@destroy')->name('delete.attend');

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Dutu;
+use App\Zone;
+use Auth;
 
 class AttendanceController extends Controller
 {
@@ -15,7 +18,28 @@ class AttendanceController extends Controller
     public function index()
     {
         //
-        return view('user.attend');
+        //$roleid='213234';
+        $roleid = Auth::user()->roleid;
+        $id = Auth::id();
+        $dutu = Dutu::all()->where('id',$id)->first();
+        //dd($dutu->idzone);
+        //$lstdutu;
+        if($roleid == 1||$roleid == 2)
+        {
+            if($roleid == 2)
+            {
+                $lstdutu = Zone::first()->dutu->all();
+                return view('user.attend')->with('lstdutu',$lstdutu);
+            }
+            else
+            {
+                $lstdutu = Dutu::all();
+                return view('user.attend')->with('lstdutu',$lstdutu);
+            }
+            //return 'admin';
+
+        }
+       // return view('user.attend',compact('lstdutu'));
     }
 
     /**
