@@ -49,72 +49,19 @@
                       <td>Giuse Nguyễn Anh Tuấn</td>
                       <td>Khe Gát</td>
                       <td>
-                        <input type="checkbox" id="checkboxPrimary2">
+                        <input name="" type="checkbox" id="checkboxPrimary2">
                       </td>
                       <td>
                         <input type="text" class="form-control" >
                       </td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Giuse Nguyễn Anh Tuấn</td>
-                      <td>Khe Gát</td>
-                      <td>
-                        <input type="checkbox" id="checkboxPrimary2">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" >
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Giuse Nguyễn Anh Tuấn</td>
-                      <td>Khe Gát</td>
-                      <td>
-                        <input type="checkbox" id="checkboxPrimary2">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" >
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Giuse Nguyễn Anh Tuấn</td>
-                      <td>Khe Gát</td>
-                      <td>
-                        <input type="checkbox" id="checkboxPrimary2">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" >
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Giuse Nguyễn Anh Tuấn</td>
-                      <td>Khe Gát</td>
-                      <td>
-                        <input type="checkbox" id="checkboxPrimary2">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" >
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Giuse Nguyễn Anh Tuấn</td>
-                      <td>Khe Gát</td>
-                      <td>
-                        <input type="checkbox" id="checkboxPrimary2">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" >
-                      </td>
-                    </tr>
-                    
+                    </tr>           
                   </tbody>
                 </table>
               </div>
+              <button style="margin-top: 15px; min-width: 125px;" class="col-lg-2 btn btn-warning" onclick="submitData()">Lưu điểm danh</button>
               <!-- /.card-body -->
             </div>
           </div>
+          
+  </script>
 @endsection

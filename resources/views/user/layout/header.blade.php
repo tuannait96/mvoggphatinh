@@ -36,6 +36,7 @@
                 </a>
               </li> 
               <li class="nav-item">
+                {{ Auth::user()->name }}
                 <a class="nav-link" href="about.html">Bài viết</a>
               </li>
               <li class="nav-item">
