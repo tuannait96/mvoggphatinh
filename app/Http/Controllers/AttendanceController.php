@@ -23,19 +23,23 @@ class AttendanceController extends Controller
         $id = Auth::id();
         $dutu = Dutu::all()->where('id',$id)->first();
         //dd($dutu->idzone);
-        $lstdutu;
+        //$lstdutu;
         if($roleid == 1||$roleid == 2)
         {
             if($roleid == 2)
             {
-                $lstdutu = Zone::first()->dutu;
-                return view('user.attend',compact('lstdutu'));
-                dd($lstdutu);
+                $lstdutu = Zone::first()->dutu->all();
+                return view('user.attend')->with('lstdutu',$lstdutu);
             }
-            
+            else
+            {
+                $lstdutu = Dutu::all();
+                return view('user.attend')->with('lstdutu',$lstdutu);
+            }
+            //return 'admin';
 
         }
-        return view('user.attend',compact('lstdutu'));
+       // return view('user.attend',compact('lstdutu'));
     }
 
     /**
