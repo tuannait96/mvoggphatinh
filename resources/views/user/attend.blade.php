@@ -55,62 +55,19 @@
                         <input type="text" class="form-control" >
                       </td>
                     </tr>
+                    @foreach ($lstdutu as $dutu)
                     <tr>
-                      <td>1.</td>
-                      <td>Giuse Nguyễn Anh Tuấn</td>
-                      <td>Khe Gát</td>
+                      <td> 1 </td>
+                      <td> {{$dutu->name}} </td>
+                      <td> {{$dutu->parish}} </td>
                       <td>
                         <input type="checkbox" id="checkboxPrimary2">
                       </td>
                       <td>
                         <input type="text" class="form-control" >
                       </td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Giuse Nguyễn Anh Tuấn</td>
-                      <td>Khe Gát</td>
-                      <td>
-                        <input type="checkbox" id="checkboxPrimary2">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" >
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Giuse Nguyễn Anh Tuấn</td>
-                      <td>Khe Gát</td>
-                      <td>
-                        <input type="checkbox" id="checkboxPrimary2">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" >
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Giuse Nguyễn Anh Tuấn</td>
-                      <td>Khe Gát</td>
-                      <td>
-                        <input type="checkbox" id="checkboxPrimary2">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" >
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Giuse Nguyễn Anh Tuấn</td>
-                      <td>Khe Gát</td>
-                      <td>
-                        <input type="checkbox" id="checkboxPrimary2">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" >
-                      </td>
-                    </tr>
-                    
+                    </tr>>
+                    @endforearch                    
                   </tbody>
                 </table>
               </div>
