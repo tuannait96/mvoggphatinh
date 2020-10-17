@@ -9,7 +9,7 @@ class Attendance extends Model
 {
 	use Notifiable;
 	protected $fillable = [
-        'id','iddutu','time','status','note',
+        'id','iddutu','month','year','status','note',
     ];
 	
 	
