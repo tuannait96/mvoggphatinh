@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Dutu;
+use App\Zone;
+use App\Attendance;
+use Auth;
 
 class AttendanceController extends Controller
 {
@@ -15,7 +19,28 @@ class AttendanceController extends Controller
     public function index()
     {
         //
-        return view('user.attend');
+        //$roleid='213234';
+        $roleid = Auth::user()->roleid;
+        $id = Auth::id();
+        $dutu = Dutu::all()->where('id',$id)->first();
+        //dd($dutu->idzone);
+        //$lstdutu;
+        if($roleid == 1||$roleid == 2)
+        {
+            if($roleid == 2)
+            {
+                $lstdutu = Zone::first()->dutu->all();
+                return view('user.attend')->with('lstdutu',$lstdutu);
+            }
+            else
+            {
+                $lstdutu = Dutu::all();
+                return view('user.attend')->with('lstdutu',$lstdutu);
+            }
+            //return 'admin';
+
+        }
+       // return view('user.attend',compact('lstdutu'));
     }
 
     /**
@@ -25,6 +50,7 @@ class AttendanceController extends Controller
      */
     public function create()
     {
+        dd('create AttendanceController');
         //
     }
 
@@ -36,36 +62,40 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        dd();
-        //
         if(Auth::user()->roleid!=1||Auth::user()->roleid!=2)
         {
-            dd('Bạn không có quyền điểm danh');
+            //dd('Bạn không có quyền điểm danh');
         }
         else
         {
             $data = json_decode($request->data, true);
-            dd($data);
-            if(Attendance::validator($request->all()->fails()))
+            //dd($data);
+            foreach ($data as $dt) 
             {
-                return Redirect::back();
-            }
-            else
-            {
-                try {
-                    Attendance::create(
-                        ['iddutu' => $request->iddutu,
-                        'month' => $request->month,
-                        'year' => $request->year,
-                        'status' => $request->status,
-                        'note' => $request->note,
-                        ]);
+                if(Attendance::validator($dt->fails()))
+                {
+                   // return Redirect::back();
                     return redirect()->route('home');
-                    
-                } catch (Exception $e) {
-                    
+                }
+                else
+                {
+                    try {
+                        Attendance::create(
+                            ['iddutu' => $dt->iddutu,
+                            'month' => $request->month,
+                            'year' => $request->year,
+                            'status' => $dt->status,
+                            'note' => $dt->note,
+                            ]);
+                        return redirect()->route('home');
+                        
+                    } catch (Exception $e) {
+                        return redirect()->route('home');
+                        
+                    }
                 }
             }
+            
         }
     }
 
@@ -78,6 +108,7 @@ class AttendanceController extends Controller
     public function show($id)
     {
         //
+        dd('show AttendanceController');
     }
 
     /**
@@ -89,6 +120,7 @@ class AttendanceController extends Controller
     public function edit($id)
     {
         //
+        dd('edit AttendanceController');
     }
 
     /**
@@ -101,6 +133,7 @@ class AttendanceController extends Controller
     public function update(Request $request, $id)
     {
         //
+        dd('update AttendanceController');
     }
 
     /**
