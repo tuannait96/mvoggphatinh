@@ -32,6 +32,7 @@
 TemplateMo 551 Stand Blog
 https://templatemo.com/tm-551-stand-blog
 -->
+
   </head>
 
   <body>
@@ -59,7 +60,8 @@ https://templatemo.com/tm-551-stand-blog
     @include('user.layout.footer')
    
 
-    <!-- Bootstrap core JavaScript -->
+    
+   <!-- Bootstrap core JavaScript -->
     <script src="{{asset('user_asset/assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('user_asset/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
@@ -90,6 +92,6 @@ https://templatemo.com/tm-551-stand-blog
       }
       
     </script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </body>
 </html>

@@ -59,9 +59,11 @@ class AttendanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        dd();
+    {return ('Đây là trang view dự tu');
+        return redirect()->route('home');
+        dd('ahdjhabsdhjsbf');
         //
+        
         if(Auth::user()->roleid!=1||Auth::user()->roleid!=2)
         {
             dd('Bạn không có quyền điểm danh');
