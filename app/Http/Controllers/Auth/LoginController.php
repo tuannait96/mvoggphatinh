@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Redirect;
 use Auth;
 use App\Dutu;
 
@@ -39,21 +40,18 @@ class LoginController extends Controller
         }
 		else
 		{
-			return '/home';
-			if(Dutu::get()->where(Auth::user()->id)->count()==0)
-			{
-				
-				//$error;
-				$user=Auth::user();
-				$dutu=Dutu::get()->where('id',$id)->first();
-				//return '/home';
-				//return ('/dutu/update');
-				//return view('auth.update_info',compact('dutu','user'));
-				return ('/dutu/update')->with(['dutu' => $dutu,'user' => $user]);
-			}
+            $dutu = Dutu::all()->where('iddutu',Auth::user()->id)->first();
+            if($dutu == null)
+            {
+                return 'dutu/create';
+            }
 			else
 			{
-				return '/home';
+                if($dutu->name == null || $dutu->holyname == null|| $dutu->dob == null || $dutu->parish == null || $dutu->school == null || $dutu->majors == null)
+                    //return ('dutu/edit');
+                    return redirect()->route('getupdate.dutu');
+                return home;
+				//return '/home';
 			}
 			
 		}

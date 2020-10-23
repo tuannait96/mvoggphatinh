@@ -149,7 +149,7 @@ https://templatemo.com/tm-551-stand-blog
           data = []
           for(i=0;i<statusList.length;i++) {
           std = {
-            'id': jQuery(statusList[i]).attr('name'),
+            'iddutu': jQuery(statusList[i]).attr('name'),
             'status': jQuery(statusList[i]).prop('checked'),
             'note': jQuery('[name=note_'+jQuery(statusList[i]).attr('name')+']').val()
                 }
@@ -162,7 +162,7 @@ https://templatemo.com/tm-551-stand-blog
                 'year': jQuery('[name=year]').val() ,
                 'data': JSON.stringify(data)} 
                 ,function(data){
-               location.reload()
+               console.log(JSON.stringify(data));
               });
 
             });

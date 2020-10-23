@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Dutu;
+use App\User;
 use Auth;
 use Redirect;
 
@@ -38,6 +39,7 @@ class DutuController extends Controller
 		if($role==1)
 		{
 			dd('Vào đây làm gì, hãy để dự tu tự tạo dự tu!!!');
+			return Redirect::back()->with('message','Bạn không tạo mới được dự tu!!!');
 		}
 		else
 		{
@@ -90,7 +92,7 @@ class DutuController extends Controller
 					'idyear'=>$request->idyear,
 					'idstatus'=>$request->idstatus,
 					]);
-					return redirect()->route('home');
+					return redirect()->route('home')->with('message','Đăng kí thành công!!!');
 				}
 				catch(\Exception $e)
 				{
@@ -112,9 +114,9 @@ class DutuController extends Controller
      */
     public function show($id)
     {
-		if($id!=Auth::id())
+		if($id!=Auth::id() && Auth::user()->roleid != 1)
 		{
-			return 'Không có quyền xem thông tin user khác mô bạn ơi!!!';
+			return Redirect::back()->with('message','Bạn không có quyền xem thông tin của người dùng khác!!!');
 		}
 		$user=Auth::user();
 		$dutu=Dutu::get()->where('id',$id)->first();
@@ -222,12 +224,20 @@ class DutuController extends Controller
     public function destroy($id)
     {
         
-        if(Auth::user()->roleid!=1)
+        if(Auth::user()->roleid != 1)
         {
         	return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
         }
-        Dutu::where('id',$id)->delete();
-		return Redirect::back();
-		return redirect()->route('admin');
+        $user=User::all()->where('id',$id);
+        if($user->first()->roleid == 2)
+        {
+        	return Redirect::back()->with('message','Bạn không thể xoá trưởng nhóm!!!');
+        }
+        try {
+        	Dutu::where('id',$id)->delete();
+        	return Redirect::back()->with('message','Xoá thành công!!!');
+        } catch (Exception $e) {
+        	return Redirect::back()->with('message','Đã có lỗi xảy ra!!!');
+        }
     }
 }

@@ -37,7 +37,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-  <h3>Xin hoàn tất thông tin cá nhân chính xác và chờ sự xác nhận của Linh mục phụ trách</h3>
+  <h5>Xin hoàn tất thông tin cá nhân chính xác và chờ sự xác nhận của Linh mục phụ trách</h5>
   </div>
 
   <div class="card">
@@ -48,7 +48,7 @@
         
 		
 		<div class="input-group mb-3">
-          <input id="holyname" type="text" class="form-control @error('name') is-invalid @enderror" name="holyname" value=""  autocomplete="name" placeholder="Tên Thánh" autofocus>
+          <input id="holyname" type="text" class="form-control @error('holyname') is-invalid @enderror" name="holyname" value=""  autocomplete="name" placeholder="Tên Thánh" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
@@ -99,7 +99,7 @@
         </div>
         <span>Ngày sinh:</span>
         <div class="input-group mb-3">
-          <input id="birthday" type="date" value="" id="example-date-input" class="form-control @error('birthday') is-invalid @enderror" name="dob" value="{{ old('dob') }}" autocomplete="birthday" required>
+          <input id="birthday" type="date" value="" id="example-date-input" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" autocomplete="birthday" required>
 
             @error('dob')
              <span class="invalid-feedback" role="alert">

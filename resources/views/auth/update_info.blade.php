@@ -35,7 +35,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="hold-transition register-page">
-<div class="register-box">
+<div class="register-bx">
   <div class="register-logo">
     <a href="#"><b>Cập nhật</b> thông tin</a>
   </div>
@@ -47,7 +47,7 @@
         @csrf
 		
 		<div class="input-group mb-3">
-          <input id="holyname" type="text" class="form-control @error('name') is-invalid @enderror" name="holyname" value="{{$dutu->holyname}}"  autocomplete="name" placeholder="" autofocus>
+          <input id="holyname" type="text" class="form-control @error('holyname') is-invalid @enderror" name="holyname" value="{{$dutu->holyname}}"  autocomplete="name" placeholder="" autofocus>
           
           <div class="input-group-append ">
             <div class="input-group-text">
@@ -100,16 +100,14 @@
         </div>
         <span>Ngày sinh:</span>
         <div class="input-group mb-3">
-          <input id="birthday" type="date" value="{{$dutu->dob}}" id="example-date-input" class="form-control @error('birthday') is-invalid @enderror" name="dob" value="{{ old('dob') }}" autocomplete="birthday" required>
+          <input id="birthday" type="date" value="{{$dutu->dob}}" id="example-date-input" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" autocomplete="birthday" required>
          
             @error('dob')
              <span class="invalid-feedback" role="alert">
               <strong>{{ $message}}</strong>
              </span>
            @enderror
-		   @if($errors->any())
-				{{ implode('', $errors->all('<div>:message</div>')) }}
-		   @endif
+		   
 		   
          
         </div>

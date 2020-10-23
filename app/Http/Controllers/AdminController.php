@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use App\Attendance;
 use App\Role;
 use App\Dutu;
@@ -26,7 +28,15 @@ class AdminController extends Controller
         $iddt=Dutu::get();
 		//get all dutu from zone...
 		$izone=Dutu::get();
-        return view('admin.dutu.danhsach',compact('iddt','izone'));
+        try {
+            //dd(($izone->first->getattend->getattend)->sortBy('month'));
+        } catch (\Exception $e) {
+            //dd('Error ' .$e->getMessage());
+        }
+        //dd($izone->first->getattend->getattend->all());
+        $index=1;
+        $index2=1;
+        return view('admin.dutu.danhsach',compact('iddt','izone','index','index2'));
 		
     }
 

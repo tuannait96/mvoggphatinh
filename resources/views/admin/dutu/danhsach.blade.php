@@ -44,8 +44,19 @@
             <div class="card card-secondary">
               <div class="card-header">
                 <h3 class="card-title" id="addnhom_title">Danh sách thành viên dự tu</h3>
+
+                @if(session('message'))
+                <h4>{{session('message')}}</h4>                  
+                @endif
+
+
+
+
+
               </div>
-            
+
+              
+
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row">
@@ -117,7 +128,7 @@
                   <tbody>
                       @foreach ($iddt as $i)
                         <tr>
-                          <td id="stt">{{$i->id}}</td>
+                          <td id="stt">{{$index++}}</td>
                           <td id="ma">{{$i->holyname}}</td>
                           <td id="ten">{{$i->name}}</td>
                           <td id=ns>{{$i->dob}}</td>
@@ -145,8 +156,8 @@
 					  <tr>
 						<th>STT</th>
 						<th>Tên thành viên</th>
-						@foreach ($izone->first->getattend->getattend as $j)
-							<th>T {{$j->time}}</th>
+						@foreach ($izone->first->getattend->getattend->sortBy('year') as $j)
+							<th>Tháng {{$j->month}}</th>
 						@endforeach
 						<th>Chức năng</th>
 					  </tr>
@@ -154,7 +165,7 @@
 					  <tbody>
 						  @foreach ($izone as $i)
 							<tr>
-							  <td id="stt">{{$i->id}}</td>
+							  <td id="stt">{{$index2++}}</td>
 							  <td id="ten">{{$i->name}}</td>
 							  @foreach ($i->getattend as $j)
 								
