@@ -20,13 +20,20 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
-        //$roleid='213234';
-        $roleid = Auth::user()->roleid;
-        $id = Auth::id();
-        $dutu = Dutu::all()->where('id',$id)->first();
-        $idzone = $dutu->idzone;
-        //dd($dutu);
+        $roleid = Auth::user()->roleid; //lấy quyền của user vừa login
+        $id = Auth::id(); //Lấy ID user vừa login
+
+        if($roleid == 1)
+        {
+            $dutu = Dutu::all()->where('idstatus','1');
+        }
+        else{
+            $dutu = Dutu::all()->where('id',$id)->first();
+            //dd($dutu);
+            $idzone = $dutu->idzone;
+        }
+        
+        
         //$lstdutu;
         if($roleid == 1 || $roleid == 2)
         {
