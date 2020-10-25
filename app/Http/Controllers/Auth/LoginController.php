@@ -35,23 +35,24 @@ class LoginController extends Controller
     {
 		$id=Auth::user()->roleid;
         if (Auth::user()->roleid==1) {
-            //dd();
             return '/admin';
         }
 		else
 		{
-            $dutu = Dutu::all()->where('iddutu',Auth::user()->id)->first();
+            $dutu = Dutu::all()->where('id',Auth::user()->id)->first();
             if($dutu == null)
             {
                 return 'dutu/create';
             }
 			else
 			{
-                if($dutu->name == null || $dutu->holyname == null|| $dutu->dob == null || $dutu->parish == null || $dutu->school == null || $dutu->majors == null)
-                    //return ('dutu/edit');
-                    return redirect()->route('getupdate.dutu');
-                return home;
-				//return '/home';
+                if(($dutu->name == null) || ($dutu->holyname == null)|| ($dutu->dob == null) || ($dutu->parish == null) || ($dutu->school == null) || ($dutu->majors == null))
+                {
+                    return 'dutu/create';
+                }
+                else{
+                    return '/home';
+                }
 			}
 			
 		}

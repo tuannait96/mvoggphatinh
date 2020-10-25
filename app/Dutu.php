@@ -39,7 +39,15 @@ class Dutu extends Model
 	{
 		return $this->hasMany('App\Attendance','iddutu','id');
 	}
+
+	//get
+	public function getattend2(string $year)
+	{
+		return $this->hasMany('App\Attendance','iddutu','id')->where('year',$year);
+	}
 	
+
+
 	public static function validator(array $data)
     {
 		//dd($data);
@@ -53,6 +61,23 @@ class Dutu extends Model
 			'idzone' => ['required', 'int', 'max:255'],
 			'idyear' => ['required', 'int', 'max:255'],
 			//'idstatus' => ['required', 'int','max:255'],
-        ]);
+        ],
+    	[
+    		'required' => ':attribute không được để trống',
+    		'string' => ':attribute khỉ được nhập chữ',
+    		'max' => ':attribute tối đa 255 kí tự',
+    		'date' => ':attribute đúng định dạng ngày tháng',
+    		'int' => ':attribute chỉ được nhập số',
+    		'after' => ':attribute phải sau ngày 01/01/1900',
+    		'before' => ':attribute phải trước ngày 31/12/3000',
+    	],
+    	[
+    		'holyname' => 'Tên Thánh',
+    		'name' => 'Tên gọi',
+    		'dob' => 'Ngày sinh',
+    		'parish' => 'Giáo xứ',
+    		'school' => 'Trường học',
+    		'majors' => 'Chuyên ngành',
+    	]);
     }	
 }

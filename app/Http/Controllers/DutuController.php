@@ -7,6 +7,9 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Dutu;
 use App\User;
+use App\Zone;
+use App\Year;
+
 use Auth;
 use Redirect;
 
@@ -21,6 +24,8 @@ class DutuController extends Controller
      */
     public function index()
     {
+    	$dutu = Dutu::first();
+    	dd($dutu->getattend2('2018')->first());
 		return ('Đây là trang view dự tu');
         //
     }
@@ -36,9 +41,11 @@ class DutuController extends Controller
 		$email = Auth::user()->email;
 		$name = Auth::user()->name;
 		$role = Auth::user()->roleid;
+		$zone = Zone::all();
+		$year = Year::all();
 		if($role==1)
 		{
-			dd('Vào đây làm gì, hãy để dự tu tự tạo dự tu!!!');
+			//dd('Vào đây làm gì, hãy để dự tu tự tạo dự tu!!!');
 			return Redirect::back()->with('message','Bạn không tạo mới được dự tu!!!');
 		}
 		else
@@ -49,7 +56,7 @@ class DutuController extends Controller
 			}
 			else
 			{
-				return view('auth.create',compact('email','name'));
+				return view('auth.create',compact('email','name','year','zone'));
 			}
 		}
     }
@@ -114,17 +121,21 @@ class DutuController extends Controller
      */
     public function show($id)
     {
+    	//dd(Auth::user()->roleid);
 		if($id!=Auth::id() && Auth::user()->roleid != 1)
 		{
 			return Redirect::back()->with('message','Bạn không có quyền xem thông tin của người dùng khác!!!');
 		}
 		$user=Auth::user();
 		$dutu=Dutu::get()->where('id',$id)->first();
+		$zone = Zone::all();
+		$year = Year::all();
+
 		if(is_null($dutu))
 		{
 			return 'Không có thông tin dự tu này trong cơ sở dữ liệu';
 		}
-		return view('auth.update_info',compact('dutu','user'));
+		return view('auth.update_info',compact('dutu','user','zone','year'));
 		
     }
 
@@ -136,7 +147,13 @@ class DutuController extends Controller
      */
     public function edit($id)
     {
+    	if($id!=Auth::id() && Auth::user()->roleid != 1)
+		{
+			return Redirect::back()->with('message','Bạn không có quyền Sửa thông tin!!!');
+		}
 		$role = Auth::user()->roleid;
+		$year = Year::all();
+		$zone = Zone::all();
 		if($role==1)
 		{
 			return Redirect::back();
@@ -148,7 +165,7 @@ class DutuController extends Controller
 			return redirect()->route('home');
 		}
 		else{
-			return view('auth.update_info',compact('dutu','user'));
+			return view('auth.update_info',compact('dutu','user','zone','year'));
 		}
     }
 
@@ -161,6 +178,10 @@ class DutuController extends Controller
      */
     public function update(Request $request, $id)
     {
+    	if($id!=Auth::id() && Auth::user()->roleid != 1)
+		{
+			return Redirect::back()->with('message','Bạn không có quyền Sửa thông tin!!!');
+		}
 		
 		if(Auth::user()->roleid==1)
 		{
@@ -191,7 +212,7 @@ class DutuController extends Controller
 					'idyear'=>$request->idyear,
 					'idstatus'=>$request->idstatus,
 					]);
-					return redirect()->route('home');
+					return redirect()->route('home')->with('message','Cập nhật thông tin thành công!!!');
 			} catch (\Exception $e) {
 				dd($e->getMessage());
 				return Redirect::back();

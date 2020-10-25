@@ -167,10 +167,9 @@
 
         <div class="input-group mb-3">
           <select id="year" type="text" class="form-control custom-select browser-default @error('year') is-invalid @enderror" name="idyear" value="{{$dutu->nameyear->name}}" autocomplete="year" autofocus   style="width: 100%;" required>
-                    <option value="">{{$dutu->nameyear->name}}</option>
-                    <option value="1">Năm 1</option>
-                    <option value="2">Năm 2</option>
-                    <option value="3">Năm 3</option>
+                    @foreach($year as $y)
+                      <option value="{{$y->id}}" @if($dutu->idyear == $y->id) selected @endif>{{$y->name}}</option>
+                    @endforeach
           </select>
           <div class="input-group-append ">
             <div class="input-group-text">
@@ -188,10 +187,9 @@
 
         <div class="input-group mb-3">
           <select id="zone" type="text" class="form-control custom-select browser-default @error('year') is-invalid @enderror" name="idzone" value="{{$dutu->namezone->name}}" autocomplete="year" autofocus   style="width: 100%;" required>
-                    <option value="">Chọn nhóm sinh hoạt</option>
-                    <option value="1">Nhóm 1</option>
-                    <option value="2">Nhóm 2</option>
-                    <option value="3">Nhóm 3</option>
+                    @foreach($zone as $z)
+                    <option value="{{$z->id}}" @if($dutu->idzone == $z->id) selected @endif >{{$z->name}}</option>
+                    @endforeach
           </select>
           <div class="input-group-append ">
             <div class="input-group-text">
