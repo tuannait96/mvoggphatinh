@@ -25,7 +25,7 @@ class AdminController extends Controller
 			//return về một route khi người dùng không là admin
 			return redirect()->route('home');
         }
-        $iddt=Dutu::get();
+        $iddt=Dutu::get()->where('idstatus','1');
 		//get all dutu from zone...
 		$izone=Dutu::get();
         try {
@@ -36,7 +36,7 @@ class AdminController extends Controller
         //dd($izone->first->getattend->getattend->all());
         $index=1;
         $index2=1;
-        return view('admin.dutu.danhsach',compact('iddt','izone','index','index2'));
+        return view('admin.home',compact('iddt','izone','index','index2'));
 		
     }
 

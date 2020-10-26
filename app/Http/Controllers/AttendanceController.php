@@ -20,32 +20,49 @@ class AttendanceController extends Controller
      */
     public function index()
     {
+        $index = 1;
         $roleid = Auth::user()->roleid; //lấy quyền của user vừa login
         $id = Auth::id(); //Lấy ID user vừa login
+        $idzone = null;
 
         if($roleid == 1)
         {
             $dutu = Dutu::all()->where('idstatus','1');
         }
         else{
-            $dutu = Dutu::all()->where('id',$id)->first();
-            //dd($dutu);
-            $idzone = $dutu->idzone;
+            $dutu = Dutu::all()->where('idstatus','1')->where('id',$id)->first();
+            //dd($dutu->idzone); //bug nếu $dutu null
+            if ($dutu != null) {
+                $idzone = $dutu->idzone;
+            }
+            
         }
         
-        
         //$lstdutu;
+        //dd($idzone);
         if($roleid == 1 || $roleid == 2)
         {
             if($roleid == 2)
             {
-                $lstdutu = Zone::findOrFail($idzone)->dutu->all();
-                return view('user.attend')->with('lstdutu',$lstdutu);
+                if ($idzone != null) {
+                    //dd('idzone !=');
+                    $lstdutu = Zone::findOrFail($idzone)->dutu->all();
+                    return view('user.attend',compact('lstdutu','index'));
+                    //return view('user.attend')->with('lstdutu',$lstdutu,'index',$index);
+                    # code...
+                }
+                else
+                {
+                    //dd('idzone null');
+                    return redirect()->back();
+                }
+                
             }
             else
             {
-                $lstdutu = Dutu::all();
-                return view('user.attend')->with('lstdutu',$lstdutu);
+                $lstdutu = Dutu::all()->where('idstatus','1');
+                return view('user.attend',compact('lstdutu','index'));
+                //return view('user.attend')->with('lstdutu',$lstdutu,'index',$index);
             }
             //return 'admin';
 
@@ -60,7 +77,54 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        dd('create AttendanceController');
+        $index = 1;
+        $roleid = Auth::user()->roleid; //lấy quyền của user vừa login
+        $id = Auth::id(); //Lấy ID user vừa login
+        $idzone = null;
+
+        if($roleid == 1)
+        {
+            $dutu = Dutu::all()->where('idstatus','1');
+        }
+        else{
+            $dutu = Dutu::all()->where('idstatus','1')->where('id',$id)->first();
+            //dd($dutu->idzone); //bug nếu $dutu null
+            if ($dutu != null) {
+                $idzone = $dutu->idzone;
+            }
+            
+        }
+        
+        //$lstdutu;
+        //dd($idzone);
+        if($roleid == 1 || $roleid == 2)
+        {
+            if($roleid == 2)
+            {
+                if ($idzone != null) {
+                    //dd('idzone !=');
+                    $lstdutu = Zone::findOrFail($idzone)->dutu->all();
+                    return view('user.attend',compact('lstdutu','index'));
+                    //return view('user.attend')->with('lstdutu',$lstdutu,'index',$index);
+                    # code...
+                }
+                else
+                {
+                    //dd('idzone null');
+                    return redirect()->back();
+                }
+                
+            }
+            else
+            {
+                $lstdutu = Dutu::all()->where('idstatus','1');
+                return view('user.attend',compact('lstdutu','index'));
+                //return view('user.attend')->with('lstdutu',$lstdutu,'index',$index);
+            }
+            //return 'admin';
+
+        }
+       return redirect()->route('home');
         //
     }
 

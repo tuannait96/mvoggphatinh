@@ -148,43 +148,7 @@
                   </tbody>
                 </table>
 
-				@if (is_null($izone->first->getattend))
-					<h3 class="card-title" id="addnhom_title">Chưa có số liệu thống kê!!!</h3>
-				@else
-					<table id="example1" class="table table-bordered table-striped">
-					  <thead>
-					  <tr>
-						<th>STT</th>
-						<th>Tên thành viên</th>
-						@foreach ($izone->first->getattend->getattend->sortBy('year') as $j)
-							<th>Tháng {{$j->month}}</th>
-						@endforeach
-						<th>Chức năng</th>
-					  </tr>
-					  </thead>
-					  <tbody>
-						  @foreach ($izone as $i)
-							<tr>
-							  <td id="stt">{{$index2++}}</td>
-							  <td id="ten">{{$i->name}}</td>
-							  @foreach ($i->getattend as $j)
-								
-								@if($j->status==1)
-									<td><input type="checkbox" checked disabled />&nbsp;</td>
-								@else
-									<td><input type="checkbox" disabled />&nbsp;</td>
-								@endif
-							  @endforeach
-							  <td>
-								<i class="fa fa-eye" style="color:green; padding-right: 10%" href=""></i>
-								<i class="fa fa-edit" style="color:blue; padding-right: 10%"></i>
-								<i class="fas fa-trash-alt" style="color:red"></i>
-							  </td>
-							</tr>
-						  @endforeach
-					  </tbody>
-					</table>
-				@endif
+				
 
 				<!-- test thống kê điểm danh-->
 				
