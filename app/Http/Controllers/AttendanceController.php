@@ -20,7 +20,17 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        return view('admin.diemdanh.list');
+        $index = 1;
+        if (Auth::user()->roleid!=1) {
+            //return về một route khi người dùng không là admin
+            return redirect()->route('home');
+        }
+        $iddt=Dutu::get()->where('idstatus','1');
+        //get all dutu from zone...
+        $izone=Attendance::get();
+
+        return view('admin.diemdanh.list',compact('index','iddt','izone'));
+        //return view('admin.diemdanh.list');
     }
 
     /**

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
 
+use Auth;
+use Redirect;
 class PostController extends Controller
 {
     /**
@@ -94,7 +96,15 @@ class PostController extends Controller
         {
             return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
         }
-		Post::where('id',$id)->delete();
-        return Redirect::back();
+        else
+        {
+            try {
+                Post::where('id',$id)->delete();
+                return Redirect::back()->with('message','Xoá bài viết thành công!!!');
+            } catch (\Exception $e) {
+                return Redirect::back()->with('message','Không xoá được bài viết!!!');
+            }
+        }
+		
     }
 }

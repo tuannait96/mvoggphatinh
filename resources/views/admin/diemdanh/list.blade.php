@@ -8,38 +8,7 @@
     <section class="content">
       <div class="container-fluid">
        <div class="row">
-        <!-- thu nhe -->
-
-        <div class="container">
- 
- 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <!-- Nội dung form đăng nhập -->
-        <div class="modal-content" style="width: 40%">
-            <form action="#">
-                <span class="close">&times;</span>
-                <h2 id="tieude_add">Thêm nhóm mới</h2>
-                
-                
-                <div class="fomrgroup">
-                    <span>Mã nhóm:</span>
-                    <input class="form-control" placeholder="Mã nhóm ..." disabled="" name="manhom">
-                </div>
-                <div class="fomrgroup">
-                    <span>Tên nhóm:</span>
-                    <input type="text" class="form-control" placeholder="Nhập tên nhóm ..." name="tennhom">
-                </div>
-                 </form>
-                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Thêm nhóm</button>
-                
-                 </div>
-           
-        </div>
-    </div>
-</div>
-        
+        <!-- thu nhe -->        
 
         <!-- het thu --> 
         <div class="col-md-12" id="danhsach_nhom">
@@ -107,7 +76,7 @@
                
                 
 
-				@if (is_null($izone->first->getattend))
+				@if (is_null($iddt->first->getattend))
 					<h3 class="card-title" id="addnhom_title">Chưa có số liệu thống kê!!!</h3>
 				@else
 					<table id="example1" class="table table-bordered table-striped">
@@ -121,13 +90,13 @@
 					  </tr>
 					  </thead>
 					  <tbody>
-						  @foreach ($izone as $i)
+						  @foreach ($iddt as $i)
 							<tr>
-							  <td id="stt">{{$i->id}}</td>
+							  <td id="stt">{{$index++}}</td>
 							  <td id="ten">{{$i->name}}</td>
-                @for($k=1;$k<=12;$k++)
-							  <td></td>
-                @endfor
+				                @for($k=1;$k<=12;$k++)
+									<td></td>
+				                @endfor
 
 							</tr>
 						  @endforeach
@@ -149,16 +118,10 @@
       </div>
    </section>
   </div>
+
   <script type="text/javascript">
     $('#year').change(function(){
-      
-    //const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    //let sum = 0;
-    //numbers.forEach(function(element){ 
-    //});
     var nam =$('#year').val();
-      $.get("{{ route('gety') }}",{year: nam},function(data){
-        console.log(nam);
       var uncheck = "<input type='checkbox' disabled id='checkboxSuccess3'>";
       var hacheck = "<input type='checkbox' checked disabled id='checkboxSuccess3'>";
       var tero = $('tr');
@@ -172,7 +135,7 @@
       }
       const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12];
       data[0].forEach(function(i){ 
-        //console.log(data[1]);
+        console.log(data[0]);
         data[1].forEach(function(j){
           if (i.id == j.iddutu && j.year == nam ) {
             numbers.forEach(function(k) {
@@ -189,19 +152,19 @@
         });
         tero = tero.next();
       });
-      })
     })
     
     $(document).ready(function(){
       var nam =$('#year').val();
-      $.get("{{ route('gety') }}",{year: nam},function(data){
       var uncheck = "<input type='checkbox' disabled id='checkboxSuccess3'>";
       var hacheck = "<input type='checkbox' checked disabled id='checkboxSuccess3'>";
       var tero = $('tr');      
       const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12];
-      data[0].forEach(function(i){ 
-        //console.log(data[1]);
-        data[1].forEach(function(j){
+      var data1 = {{$iddt}};
+      var data2 = {{$izone}};
+      data1.forEach(function(i){ 
+        console.log(data1);
+        data2.forEach(function(j){
           if (i.id == j.iddutu && j.year == nam ) {
             numbers.forEach(function(k) {
                if (j.month==k) {
@@ -217,9 +180,11 @@
         });
         tero = tero.next();
       });
-      })
+      
     })
   </script>
+
+
   <!-- /.content-wrapper -->
   <!-- /.content-wrapper -->
   @endsection
