@@ -161,42 +161,27 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td id="stt">1</td>
-                    <td id="ma">1</td>
-                    <td id="ten">Giuse Nguyễn Anh Tuấn</td>
-                    <td id=ns>9/9/1996</td>
-                    <td id="truong">Đại học Bôn Ba</td>
-                    <td id="nganh">Công nghệ thông tin</td>
-                    <td id="xu">Khe Gát</td>
-                    <td id="nam">Năm 2</td>
-                    <td id="nhom">Đà Nẵng</td>
-                    <td id="trangthai"><small class="badge badge-primary">Đang sinh hoạt</small></td>
-                    <td>
-                      <i class="fa fa-eye" style="color:green; padding-right: 10%"></i>
-                      <i class= "fa fa-edit" style="color:blue; padding-right: 10%"></i>
-                      <i class="fas fa-trash-alt" style="color:red"></i>
-                    </td>
-                  
-                  </tr>
                     <tr>
-                    <td id="stt">1</td>
-                    <td id="ma">1</td>
-                    <td id="ten">Giuse Nguyễn Anh Tuấn</td>
-                    <td id=ns>9/9/1996</td>
-                    <td id="truong">Đại học Bôn Ba</td>
-                    <td id="nganh">Công nghệ thông tin</td>
-                    <td id="xu">Khe Gát</td>
-                    <td id="nam">Năm 1</td>
-                    <td id="nhom">Đà Nẵng</td>
-                    <td id="trangthai"><small class="badge badge-primary">Đang sinh hoạt</small></td>
-                    <td>
-                      <i class="fa fa-eye" style="color:green; padding-right: 10%"></i>
-                      <i class="fa fa-edit" style="color:blue; padding-right: 10%"></i>
-                      <i class="fas fa-trash-alt" style="color:red"></i>
-                    </td>
-                  
-                  </tr>
+                          @foreach ($iddt as $i)
+                          <tr>
+                            <td id="stt">{{$index++}}</td>
+                            <td id="ma">{{$i->holyname}}</td>
+                            <td id="ten">{{$i->name}}</td>
+                            <td id=ns>{{$i->dob}}</td>
+                            <td id="truong">{{$i->school}}</td>
+                            <td id="nganh">{{$i->majors}}</td>
+                            <td id="xu">{{$i->parish}}</td>
+                            <td id="nam">{{$i->nameyear->name}}</td>
+                            <td id="nhom">{{$i->namezone->name}}</td>
+                            <td id="trangthai"><small class="badge badge-primary">{{$i->namestatus->name}}</small></td>
+                            <td>
+                              <a class="fa fa-eye" style="color:green; padding-right: 10%" href="{{url('dutu',$i->id)}}"></a>
+                <a class="fa fa-trash-alt" style="color:green; padding-right: 10%" href="{{url('dutu/delete',$i->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa Dự tu này không?');" title="Xóa"></a>
+                              <i class="fas fa-edit" style="color:red"></i>
+                            </td>
+                          </tr>
+                        @endforeach
+                    </tr>
                   </tbody>
                 </table>
           </section>

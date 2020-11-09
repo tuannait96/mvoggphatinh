@@ -20,30 +20,17 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
-        //$roleid='213234';
-        $roleid = Auth::user()->roleid;
-        $id = Auth::id();
-        $dutu = Dutu::all()->where('id',$id)->first();
-        $idzone = $dutu->idzone;
-        //dd($dutu);
-        //$lstdutu;
-        if($roleid == 1 || $roleid == 2)
-        {
-            if($roleid == 2)
-            {
-                $lstdutu = Zone::findOrFail($idzone)->dutu->all();
-                return view('user.attend')->with('lstdutu',$lstdutu);
-            }
-            else
-            {
-                $lstdutu = Dutu::all();
-                return view('user.attend')->with('lstdutu',$lstdutu);
-            }
-            //return 'admin';
-
+        $index = 1;
+        if (Auth::user()->roleid!=1) {
+            //return về một route khi người dùng không là admin
+            return redirect()->route('home');
         }
-       return redirect()->route('home');
+        $iddt=Dutu::get()->where('idstatus','1');
+        //get all dutu from zone...
+        $izone=Attendance::get();
+
+        return view('admin.diemdanh.list',compact('index','iddt','izone'));
+        //return view('admin.diemdanh.list');
     }
 
     /**
@@ -53,7 +40,54 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        dd('create AttendanceController');
+        $index = 1;
+        $roleid = Auth::user()->roleid; //lấy quyền của user vừa login
+        $id = Auth::id(); //Lấy ID user vừa login
+        $idzone = null;
+
+        if($roleid == 1)
+        {
+            $dutu = Dutu::all()->where('idstatus','1');
+        }
+        else{
+            $dutu = Dutu::all()->where('idstatus','1')->where('id',$id)->first();
+            //dd($dutu->idzone); //bug nếu $dutu null
+            if ($dutu != null) {
+                $idzone = $dutu->idzone;
+            }
+            
+        }
+        
+        //$lstdutu;
+        //dd($idzone);
+        if($roleid == 1 || $roleid == 2)
+        {
+            if($roleid == 2)
+            {
+                if ($idzone != null) {
+                    //dd('idzone !=');
+                    $lstdutu = Zone::findOrFail($idzone)->dutu->all();
+                    return view('user.attend',compact('lstdutu','index'));
+                    //return view('user.attend')->with('lstdutu',$lstdutu,'index',$index);
+                    # code...
+                }
+                else
+                {
+                    //dd('idzone null');
+                    return redirect()->back();
+                }
+                
+            }
+            else
+            {
+                $lstdutu = Dutu::all()->where('idstatus','1');
+                return view('user.attend',compact('lstdutu','index'));
+                //return view('user.attend')->with('lstdutu',$lstdutu,'index',$index);
+            }
+            //return 'admin';
+
+        }
+       return redirect()->route('home');
         //
     }
 

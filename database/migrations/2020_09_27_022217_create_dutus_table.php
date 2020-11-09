@@ -15,6 +15,7 @@ class CreateDutusTable extends Migration
     {
         Schema::create('dutus', function (Blueprint $table) {
             $table->id();
+            $table->string('profileimg')->nullable();
 			$table->string('holyname');
 			$table->string('name');
 			$table->date('dob');
