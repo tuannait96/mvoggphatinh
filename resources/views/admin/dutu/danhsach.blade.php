@@ -4,7 +4,7 @@
 	@section('content')
   
   <!--------------------------------------------------------->
-   <div class="content-wrapper">
+
     <section class="content">
       <div class="container-fluid">
        <div class="row">
@@ -95,9 +95,13 @@
                        <button type="button" id="loc" class="btn btn-primary"><i class='fas fa-filter'></i>   Lọc</button>
                     </div>
                    <select aria-label="Năm" name="year" id="year" title="Năm" class="sl_at">
-                      <option value="0">Năm</option>
-                      @for($i=2019; $i<=date("Y"); $i++)
-                      <option @if($i==date("Y")) selected @endif value="{{$i}}">{{$i}}</option>
+                      <option value="0">Năm học</option>
+                      @for($i=2016; $i<=date("Y"); $i++)
+                      @if(date("m")<9)
+                      <option @if($i==date("Y")) selected @endif value="{{$i-1}}-{{$i}}">{{$i-1}}-{{$i}}</option>
+                      @else
+                      <option @if($i==date("Y")) selected @endif value="{{$i}}-{{$i+1}}">{{$i}}-{{$i+1}}</option>
+                      @endif
                       @endfor
                     </select>
                     </div>
@@ -115,9 +119,12 @@
 					  <tr>
 						<th>STT</th>
 						<th>Tên thành viên</th>
-						@for($i=1;$i<=12; $i++)
+						@for($i=9;$i<=12; $i++)
 							<th>T {{$i}}</th>
-						@endfor						
+						@endfor
+            @for($i=1;$i<=8; $i++)
+              <th>T {{$i}}</th>
+            @endfor 					
 					  </tr>
 					  </thead>
 					  <tbody>
@@ -148,7 +155,7 @@
        </div>
       </div>
    </section>
-  </div>
+
   <script type="text/javascript">
     $('#year').change(function(){
       
@@ -176,12 +183,19 @@
         data[1].forEach(function(j){
           if (i.id == j.iddutu && j.year == nam ) {
             numbers.forEach(function(k) {
+
                if (j.month==k) {
+                if (j.month>=9) {
+                  k=k-2;
+                }
+                else {
+                  k=k+12-7;
+                }
                 if (j.status==1) {
-                    tero.find("td").eq(k+1).append(hacheck);
+                    tero.find("td").eq(k).append(hacheck);
                    }
                 if (j.status==0) {
-                    tero.find("td").eq(k+1).append(uncheck);
+                    tero.find("td").eq(k).append(uncheck);
                    }
                }  
             })
@@ -205,11 +219,17 @@
           if (i.id == j.iddutu && j.year == nam ) {
             numbers.forEach(function(k) {
                if (j.month==k) {
+                if (j.month >= 9) {
+                  k=k-7;
+                }
+                if(j.month < 9){
+                  k=k+12-7;
+                }
                 if (j.status==1) {
-                    tero.find("td").eq(k+1).append(hacheck);
+                    tero.find("td").eq(k).append(hacheck);
                    }
                 if (j.status==0) {
-                    tero.find("td").eq(k+1).append(uncheck);
+                    tero.find("td").eq(k).append(uncheck);
                    }
                }  
             })

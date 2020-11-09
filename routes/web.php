@@ -38,3 +38,6 @@ Route::post('attend/edit/{id}','AttendanceController@update')->name('update.atte
 Route::post('attend/store','AttendanceController@store')->name('save.attend');
 Route::get('attend/edit/{id}','AttendanceController@edit')->name('getupdate.attend');
 Route::get('/gety','AdminController@gety')->name('gety');
+Route::get('info', function () {
+    return view('user/info_user');
+});

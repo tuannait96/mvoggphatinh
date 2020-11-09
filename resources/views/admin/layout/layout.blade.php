@@ -96,8 +96,9 @@
  	@include('admin.layout.header')
 
   <!-- Content Wrapper. Contains page content -->
-
+  <div class="content-wrapper">
   	@yield('content')
+  </div>
 </div>
   <!-- /.content-wrapper -->
   @include('admin.layout.footer')

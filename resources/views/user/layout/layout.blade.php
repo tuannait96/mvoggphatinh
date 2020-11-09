@@ -48,6 +48,7 @@
 <script src="{{asset('admin_asset/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('admin_asset/dist/js/demo.js')}}"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!--
 TemplateMo 551 Stand Blog
 https://templatemo.com/tm-551-stand-blog
