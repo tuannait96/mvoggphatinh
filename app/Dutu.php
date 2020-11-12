@@ -44,6 +44,7 @@ class Dutu extends Model
     {
 		//dd($data);
         return Validator::make($data, [
+        	'profileimg' => ['image'],
 			'holyname' => ['required','string','max:255'],
             'name' => ['required', 'string', 'max:255'],
 			'dob' => ['required','date','after:01-01-1900','before:30-12-3000'],
@@ -53,6 +54,25 @@ class Dutu extends Model
 			'idzone' => ['required', 'int', 'max:255'],
 			'idyear' => ['required', 'int', 'max:255'],
 			//'idstatus' => ['required', 'int','max:255'],
-        ]);
+        ],
+    	[
+    		'image' => ':attribute không hợp lệ',
+    		'required' => ':attribute không được để trống',
+    		'string' => ':attribute khỉ được nhập chữ',
+    		'max' => ':attribute tối đa 255 kí tự',
+    		'date' => ':attribute đúng định dạng ngày tháng',
+    		'int' => ':attribute chỉ được nhập số',
+    		'after' => ':attribute phải sau ngày 01/01/1900',
+    		'before' => ':attribute phải trước ngày 31/12/3000',
+    	],
+    	[
+    		'profileimg' => 'Ảnh',
+    		'holyname' => 'Tên Thánh',
+    		'name' => 'Tên gọi',
+    		'dob' => 'Ngày sinh',
+    		'parish' => 'Giáo xứ',
+    		'school' => 'Trường học',
+    		'majors' => 'Chuyên ngành',
+    	]);
     }	
 }
