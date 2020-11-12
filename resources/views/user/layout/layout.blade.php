@@ -27,7 +27,28 @@
   <link rel="stylesheet" href="{{asset('admin_asset/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('admin_asset/dist/css/adminlte.min.css')}}">
-    <link rel="stylesheet" href="{{asset('user_asset/assets/css/them.css')}}">
+  <link rel="stylesheet" href="{{asset('user_asset/assets/css/them.css')}}">
+
+      <!-- Bootstrap core JavaScript -->
+    <script src="{{asset('user_asset/assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('user_asset/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Additional Scripts -->
+    <script src="{{asset('user_asset/assets/js/custom.js')}}"></script>
+    <script src="{{asset('user_asset/assets/js/owl.js')}}"></script>
+    <script src="{{asset('user_asset/assets/js/slick.js')}}"></script>
+    <script src="{{asset('user_asset/assets/js/isotope.js')}}"></script>
+    <script src="{{asset('user_asset/assets/js/accordions.js')}}"></script>
+    <!-- DataTables -->
+<script src="{{asset('admin_asset/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('admin_asset/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('admin_asset/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('admin_asset/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{asset('admin_asset/dist/js/adminlte.min.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{asset('admin_asset/dist/js/demo.js')}}"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!--
 TemplateMo 551 Stand Blog
 https://templatemo.com/tm-551-stand-blog
@@ -58,28 +79,6 @@ https://templatemo.com/tm-551-stand-blog
     </section>
 
     @include('user.layout.footer')
-   
-
-    
-   <!-- Bootstrap core JavaScript -->
-    <script src="{{asset('user_asset/assets/js/jquery.min.js')}}"></script>
-    <script src="{{asset('user_asset/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-    <!-- Additional Scripts -->
-    <script src="{{asset('user_asset/assets/js/custom.js')}}"></script>
-    <script src="{{asset('user_asset/assets/js/owl.js')}}"></script>
-    <script src="{{asset('user_asset/assets/js/slick.js')}}"></script>
-    <script src="{{asset('user_asset/assets/js/isotope.js')}}"></script>
-    <script src="{{asset('user_asset/assets/js/accordions.js')}}"></script>
-    <!-- DataTables -->
-<script src="{{asset('admin_asset/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('admin_asset/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('admin_asset/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('admin_asset/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('admin_asset/dist/js/adminlte.min.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{asset('admin_asset/dist/js/demo.js')}}"></script>
 
     <script language = "text/Javascript"> 
       cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
@@ -92,6 +91,5 @@ https://templatemo.com/tm-551-stand-blog
       }
       
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </body>
 </html>

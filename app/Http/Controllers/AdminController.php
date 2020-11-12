@@ -26,6 +26,7 @@ class AdminController extends Controller
         $iddt=Dutu::get();
 		//get all dutu from zone...
 		$izone=Dutu::get();
+
         return view('admin.dutu.danhsach',compact('iddt','izone'));
 		
     }
@@ -96,5 +97,22 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function gety()
+    {
+        $year = $_GET['year'];
+        //return $p;
+       // foreach (Attendance as $i => where) {
+            # code...
+        //}
+        $lstdd = Attendance::all();
+       
+        //$lstdd[] = (array)$lstdd1;
+        $lstdutu = Dutu::all();
+       
+        //$lstdutu[] = (array)$lstdutu1;
+        return array($lstdutu,$lstdd);
+        //$total = array('' => , );
+       // return $lstdd;
     }
 }
