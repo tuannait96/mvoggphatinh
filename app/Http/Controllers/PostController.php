@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use App\Dutu;
 use App\Post;
-
+// 
 use Auth;
 use Redirect;
 class PostController extends Controller
@@ -18,6 +20,8 @@ class PostController extends Controller
     public function index()
     {
         //
+        $lstpost = Post::all();
+        return view('post.list',compact('lstpost'));
     }
 
     /**
@@ -27,6 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        return view('post.create');
         //
     }
 
@@ -39,9 +44,17 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-		Post::create(
-		['content'=>$request->content,
-		]);
+        // return $request->all();
+        if(Auth::user()->roleid != 1)
+        {
+            return 'Khong cos quyen';
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+		try {
+            Post::create($request->all());
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -53,7 +66,7 @@ class PostController extends Controller
     public function show($id)
     {
         //
-		$post=Post::get()->where('id',$id);
+		$post = Post::get()->where('id',$id)->first();
     }
 
     /**
@@ -65,7 +78,7 @@ class PostController extends Controller
     public function edit($id)
     {
         //
-		$post=Post::where('id',$id)->first();
+		$post = Post::where('id',$id)->first();
     }
 
     /**
@@ -92,7 +105,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-        if(Auth::user()->roleid!=1)
+        if(Auth::user()->roleid != 1)
         {
             return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
         }
