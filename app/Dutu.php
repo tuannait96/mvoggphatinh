@@ -12,7 +12,7 @@ class Dutu extends Model
 	use Notifiable;
 	
 	protected $fillable = [
-        'id','name','holyname','dob','school','majors','parish','idzone','idyear','idstatus',
+        'id','name','holyname','profileimg','dob','school','majors','parish','idzone','idyear','idstatus',
     ];
     //
 	/**
@@ -44,7 +44,7 @@ class Dutu extends Model
     {
 		//dd($data);
         return Validator::make($data, [
-        	'profileimg' => ['image'],
+        	//'profileimg' => ['image'],
 			'holyname' => ['required','string','max:255'],
             'name' => ['required', 'string', 'max:255'],
 			'dob' => ['required','date','after:01-01-1900','before:30-12-3000'],
@@ -53,10 +53,11 @@ class Dutu extends Model
 			'majors' => ['required','string','max:255'],
 			'idzone' => ['required', 'int', 'max:255'],
 			'idyear' => ['required', 'int', 'max:255'],
-			//'idstatus' => ['required', 'int','max:255'],
+			'idstatus' => ['required', 'int','max:255'],
+            'email' => ['required', 'string','max:255'],
         ],
     	[
-    		'image' => ':attribute không hợp lệ',
+    		//'image' => ':attribute không hợp lệ',
     		'required' => ':attribute không được để trống',
     		'string' => ':attribute khỉ được nhập chữ',
     		'max' => ':attribute tối đa 255 kí tự',
@@ -66,13 +67,14 @@ class Dutu extends Model
     		'before' => ':attribute phải trước ngày 31/12/3000',
     	],
     	[
-    		'profileimg' => 'Ảnh',
+    		//'profileimg' => 'Ảnh',
     		'holyname' => 'Tên Thánh',
     		'name' => 'Tên gọi',
     		'dob' => 'Ngày sinh',
     		'parish' => 'Giáo xứ',
     		'school' => 'Trường học',
     		'majors' => 'Chuyên ngành',
+            'email' => 'Email',
     	]);
     }	
 }

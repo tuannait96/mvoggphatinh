@@ -132,7 +132,7 @@ class DutuController extends Controller
 		{
 			return 'Không có thông tin dự tu này trong cơ sở dữ liệu';
 		}
-		return view('auth.update_info',compact('dutu','user','zone','year'));
+		return view('user.info',compact('dutu','user','zone','year'));
 		
     }
 
@@ -175,37 +175,59 @@ class DutuController extends Controller
      */
     public function update(Request $request, $id)
     {
-		
+		//
+		// return $request->all();
 		if($id!=Auth::id() && Auth::user()->roleid != 1)
 		{
 			return Redirect::back()->with('message','Bạn không có quyền Sửa thông tin!!!');
 		}
-		
+		$user=Auth::user();
+		$dutu=Dutu::get()->where('id',$id)->first();
+
 		if(Auth::user()->roleid==1)
 		{
-			$request->idstatus = 1;
+			if($request->idstatus=="on")
+			{
+				$request['idstatus'] = 1;
+			}
+			else
+			{
+				$request['idstatus'] = 2;
+			}
+			
 		}
 		else
 		{
-			$request->idstatus = 2;		
-		}
-		//$user=Auth::user();
-		//$dutu=Dutu::get()->where('id',$id)->first();
-		$vali=Dutu::validator($request->all());
-		if(Dutu::validator($request->all())->fails())
+			$request->idstatus = $dutu->idstatus;;		
+		}	
+		if($request->profileimg=="")
 		{
-			return Redirect::back()->withErrors($vali);
+			$request['profileimg'] = $dutu->profileimg;
 		}
-		else
-		{
-			$imagename = time().'.'.request()->profileimg->getClientOriginalExtension();
-            $request['profileimg'] = $imagename;
 
-            request()->profileimg->move(public_path('file/profileimg'), $imagename);
+		$vali = Dutu::validator($request->all());
+		return $vali;
+		 if($vali->fails())
+		 {
+		 	return "vali"; //$vali->message();
+		   //return Redirect::back()->withErrors($vali);
+		 }
+		 else
+		{
+			 $imagename = time().'.'.request()->profileimg->getClientOriginalExtension();
+			  return $imagename;
+   //          $request['profileimg'] = $imagename;
+   //        	try {
+   //        		request()->profileimg->move(public_path('file'), $imagename);
+   //        	} catch (\Exception $e) {
+   //        		return $e->getMessage();
+   //        	}
+   //         // 
+   //          return $request->profileimg;
 			try {
 				Dutu::where('id',$id)->update(
 					['holyname'=>$request->holyname,
-					'profileimg'=> $imgname,
+					'profileimg'=> 'bbbaaaeee',
 					'name'=>$request->name,
 					'dob'=>$request->dob,
 					'parish'=>$request->parish,
@@ -217,6 +239,7 @@ class DutuController extends Controller
 					]);
 					return 'aa';//redirect()->route('home')->with('message','Cập nhật thông tin thành công!!!');
 			} catch (\Exception $e) {
+				return 'error';
 				dd($e->getMessage());
 				return Redirect::back();
 			}
@@ -246,6 +269,7 @@ class DutuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         

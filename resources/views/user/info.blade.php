@@ -24,65 +24,96 @@
       <div class="container-fluid">
    
         <div style="min-height: 100%;" class="card card-primary card-outline">
-          <form enctype="multipart/form-data" id="infoEdit">
+         
                   <div class="card-body box-profile">
                     <div class="text-center" >
+                      <form id="frmupdate">
+                        {{ csrf_field() }}
                         <div class="text-center" style="margin-left: 26px;">
-                      <img id="preview" class="profile-user-img img-fluid img-circle"
-                           src="../../dist/img/user4-128x128.jpg"
-                           alt="User profile picture" style="margin-right: -100px;">
-                            <label id="c_image" class="btn fa fa-camera" for="my-file-selector"> 
-                            <input id="my-file-selector" type="file" style="display:none" 
-                            onchange="$('#upload-file-info').html(this.files[0].name)">
-                            </label>
-                            <span class='label label-info' id="upload-file-info" style="display: none;" ></span>
+                       @if (File::exists(public_path("file/profileimg/".$dutu->profileimg)))
+                          <img id="preview" class="profile-user-img img-fluid img-circle" src="{{ asset('file/profileimg/' . $dutu->profileimg) }}" alt="User profile picture" style="margin-right: -100px;" />
+                          @else 
+                          <img id="preview" class="profile-user-img img-fluid img-circle" src="{{ asset('file/profileimg/noavatar.png') }}" alt="User profile picture" style="margin-right: -100px;" />
+                      @endif
+                      <label id="c_image" class="btn fa fa-camera" for="my-file-selector"> 
+                      <input name="profileimg" id="my-file-selector" type="file" style="display:none" 
+                      >
+                      </label>
+                      <span class='label label-info' id="upload-file-info" style="display: none;" ></span>
                           
                     </div>
                     
                     <div class="row text-center" style="margin-bottom: 15px;">
                       <div class="col-sm-6 text-center" style="margin: 0 auto;">
-                        <input type="text" class="form-control profile-username thongtinten" value="Giuse" disabled placeholder="Chưa có"> 
-                      <input type="text" class="form-control profile-username thongtinten" value="Nguyễn Anh Tuấn" disabled placeholder="Chưa có">
+                        <input name="holyname" type="text" class="form-control profile-username thongtinten" value="{{$dutu->holyname}}" disabled placeholder="Chưa có"> 
+                      <input name="name" type="text" class="form-control profile-username thongtinten" value="{{$dutu->name}}" disabled placeholder="Chưa có">
                       </div>
                     </div>
                     <div class="row">
                       <div style="padding:0;" class="col-xs-6 col-md-6">
                       <ul style="padding-right: 5%; padding-left: 2%; border-left: outset #1586ffb5;" class="list-group list-group-unbordered mb-3">
                       <li class="list-group-item">
-                        <a class="float-left">Giáo xứ</a> <b class="float-right"><input type="text" class="form-control thongtin" disabled value="Khe Gát" placeholder="Chưa có"> </b> 
+                        <a class="float-left">Giáo xứ</a> <b class="float-right"><input name="parish" type="text" class="form-control thongtin" disabled value="{{$dutu->parish}}" placeholder="Chưa có"> </b> 
                       </li>
                       <li class="list-group-item">
-                        <a class="float-left">Nhóm</a> <b class="float-right"><input type="text" class="form-control thongtin" disabled value="Đà Nẵng" placeholder="Chưa có"></b> 
+                        <a class="float-left">Nhóm</a> <b class="float-right">
+                          <select id="idzone" type="text" class="form-control thongtin @error('idzone') is-invalid @enderror" name="idzone" value="{{$dutu->namezone->name}}" autocomplete="idzone" autofocus   style="width: 100%;" required>
+                              @foreach($zone as $z)
+                              <option value="{{$z->id}}" @if($dutu->idzone == $z->id) selected @endif >{{$z->name}}</option>
+                              @endforeach
+                                  
+                        </select>
+                        </b> 
                       </li>
                       <li class="list-group-item">
-                        <a class="float-left">Năm dự tu</a> <b class="float-right"><input type="text" class="form-control thongtin" disabled value="Năm 2" placeholder="Chưa có"></b> 
+                        <a class="float-left">Năm dự tu</a> <b class="float-right">
+                          <select id="idyear" disabled type="text" class="form-control thongtin @error('idyear') is-invalid @enderror" name="idyear" value="{{$dutu->nameyear->name}}" autocomplete="idyear" autofocus   style="width: 100%;" required>
+                            @foreach($year as $y)
+                            <option value="{{$y->id}}" @if($dutu->idyear == $y->id) selected @endif>{{$y->name}}</option>
+                          @endforeach
+                         </select>
+                        </b> 
                       </li>
                       <li class="list-group-item">
-                        <a class="float-left">Ngày sinh</a> <b class="float-right"><input type="text" class="form-control thongtin" disabled value="09/09/1996" placeholder="Chưa có"></b> 
+                        <a class="float-left">Ngày sinh</a> <b class="float-right"><input name="dob" type="text" onmouseover="(this.type='date')" onmouseout="(this.type='text')" id="example-date-input dob" class="form-control thongtin" disabled value="{{$dutu->dob}}" placeholder="Chưa có"></b> 
                       </li>
                     </ul>
                     </div>
                     <div style="padding:0" class="col-xs-6 col-md-6">
                       <ul style="padding-right: 5%; padding-left: 2%; border-left: outset #1586ffb5;" class="list-group list-group-unbordered mb-3">
                       <li class="list-group-item">
-                        <a class="float-left">Trường học</a> <b class="float-right"><input type="text" class="form-control thongtin" disabled value="Bôn Ba" placeholder="Chưa có"></b> 
+                        <a class="float-left">Email</a> <b class="float-right"><input style="max-width: 195px;" name="email" type="text" class="form-control thongtin" disabled value="{{$user->email}}" placeholder="Chưa có"></b> 
                       </li>
                       <li class="list-group-item">
-                        <a class="float-left">Ngành học</a> <b class="float-right"><input type="text" class="form-control thongtin" disabled value="Công nghệ thông tin" placeholder="Chưa có"></b> 
+                        <a class="float-left">Trường học</a> <b class="float-right"><input name="school" type="text" class="form-control thongtin" disabled value="Bôn Ba" placeholder="Chưa có"></b> 
                       </li>
                       <li class="list-group-item">
-                        <a class="float-left">Trạng thái</a> <b class="float-right"><input type="text" class="form-control thongtin" disabled value="Đang sinh hoạt" placeholder="Chưa có"></b> 
+                        <a class="float-left">Ngành học</a> <b class="float-right"><input name="majors" type="text" class="form-control thongtin" disabled value="{{$dutu->majors}}" placeholder="Chưa có"></b> 
+                      </li>
+                      <li class="list-group-item">
+                        <a class="float-left">Trạng thái</a> <b class="float-right"><div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                       @if($dutu->idstatus==1)
+                        <input type="checkbox" name="idstatus" checked="checked" disabled class="custom-control-input thongtin" id="customSwitch3">
+                        <label style="border: none;" class="form-control thongtin custom-control-label" id="statusname" for="customSwitch3">{{$dutu->namestatus->name}}</label>
+                       @else 
+                       <input type="checkbox" name="idstatus" disabled class="custom-control-input thongtin" id="customSwitch3">
+                        <label  style="border: none;" class="form-control thongtin custom-control-label" id="statusname" for="customSwitch3">{{$dutu->namestatus->name}}</label>
+                        @endif
+                    </div></b> 
+
+
                       </li>
                       
                     </ul>
                     </div>
                     </div>
-                    <button style="float: right; margin-left: 2%" id="btnedit" class="btn btn-primary">Chỉnh sửa</button>
-                    <button type="submit" style="float: right;" id="btnsave" class="btn btn-primary">Lưu</button>
+                    <button type="submit" value="submit" style="float: right; margin-left: 2%" name="btnsave" id="btnsave" class="btn btn-primary">Lưu</button>
+                    </form>
+                    <button style="float: right" id="btnedit" class="btn btn-primary">Chỉnh sửa</button>
                   </div>
                   <!-- /.card-body -->
                 </div>
-            </form>
+            
 
           <div class="col-sm-12">
             <div class="row">
@@ -199,6 +230,15 @@
 </div>
 
   <script type="text/javascript">
+//checkbox su kien status name
+$("#customSwitch3").click( function(){
+   if( $(this).is(':checked') ){
+    $('#statusname').text("Đang Sinh Hoạt");
+   }
+   else{
+    $('#statusname').text("Đang Chờ Duyệt");
+   }
+});
 
 $('#btnedit').click(function(){
   $('.thongtin').removeAttr("disabled");
@@ -209,35 +249,57 @@ $('#btnedit').click(function(){
 })
 </script>
 <script type="text/javascript">
-        $(document).ready(function () {
+     $(document).ready(function () {
+      // set date for textbox date ò birth
+      // end setdate
+      // view img
+      $('input[type="file"]').change(function(e) {
+          var fileName = e.target.files[0].name;
+          $("#file").val(fileName);
+         //alert($("#upload-file-info").text())
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            // get loaded data and render thumbnail.
+            document.getElementById("preview").src = e.target.result;
+          };
+          // read the image file as a data URL.
+          reader.readAsDataURL(this.files[0]);
+      });
 
-        $('#infoEdit').submit(function() {
-            $.ajaxSetup({
-                headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-             
-            e.preventDefault();
-            var formData = new FormData(this);
+
+      // ajax chuyen du lieu
+      var frm = $('#frmupdate');
+
+       frm.submit(function (e) {
+         $.ajaxSetup({
+      headers: {
+        'X-CSSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+        e.preventDefault();
+
+                var fdt = new FormData(this);
             $.ajax({
                type:'POST',
-               url: "{{route('info')}}",
-               data:formData,
+               url: "{{ route('update.dutu',$dutu->id) }}",
+               data:fdt,
                cache:false,
                contentType: false,
                processData: false,
              
                  complete: function(response) 
                 {
-                    if($.isEmptyObject(response.responseJSON.error)){
-                            $('.success').show();
-                           setTimeout(function(){
-                           $('.success').hide();
-                        }, 5000);
-                    }else{
-                        printErrorMsg(response.responseJSON.error);
-                    }
+                  console.log(response.responseText);
+                  //alert();
+                  
+                    // if($.isEmptyObject(response.responseJSON.error)){
+                    //         $('.success').show();
+                    //        setTimeout(function(){
+                    //        $('.success').hide();
+                    //     }, 5000);
+                    // }else{
+                    //     printErrorMsg(response.responseJSON.error);
+                    // }
                 }
 
             });
@@ -249,6 +311,8 @@ $('#btnedit').click(function(){
                 $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
             });
        }
+        
+     })
     </script>
  
     @endsection
