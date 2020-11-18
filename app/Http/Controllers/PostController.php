@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use App\Dutu;
 use App\Post;
-
+// 
 use Auth;
 use Redirect;
 class PostController extends Controller
@@ -18,6 +20,8 @@ class PostController extends Controller
     public function index()
     {
         //
+        $lstpost = Post::all();
+        return view('post.list',compact('lstpost'));
     }
 
     /**
@@ -27,6 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        return view('post.create');
         //
     }
 
@@ -39,9 +44,26 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-		Post::create(
-		['content'=>$request->content,
-		]);
+        // return $request->all();
+        if(Auth::user()->roleid != 1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        if (Post::validator($request->all())->fails()) {
+                # code...
+                return Post::validator($request->all());
+        }
+        else
+        {
+            try {
+                Post::create($request->all());
+                return 'Thành công!!!';
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        }
+
+		
     }
 
     /**
@@ -53,7 +75,9 @@ class PostController extends Controller
     public function show($id)
     {
         //
-		$post=Post::get()->where('id',$id);
+		// $post = Post::get()->where('id',$id)->first();
+        $post = Post::findOrFail($id);
+        return view('post.edit',compact('post'));
     }
 
     /**
@@ -65,7 +89,9 @@ class PostController extends Controller
     public function edit($id)
     {
         //
-		$post=Post::where('id',$id)->first();
+		$post = Post::findOrFail($id);
+        // dd($post);
+        return view('post.edit',compact('post'));
     }
 
     /**
@@ -78,9 +104,32 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
-		Post::where('id',$id)->update(
-		['content'=>$request->content,
-		]);
+
+        if(Auth::user()->roleid != 1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        if (Post::validator($request->all())->fails()) {
+                # code...
+                return Post::validator($request->all());
+        }
+        else
+        {
+            try {
+                // Post::create($request->all());
+                Post::where('id',$id)->update(
+                    [
+                        'thumbimg' => $request->thumbimg,
+                        'title' => $request->title,
+                        'content' => $request->content,
+                        'status' => $request->status,
+                        'idpost' => $request->idpost,
+                    ]);
+                return 'Update Thành công!!!';
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        }
     }
 
     /**
@@ -92,7 +141,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-        if(Auth::user()->roleid!=1)
+        if(Auth::user()->roleid != 1)
         {
             return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
         }

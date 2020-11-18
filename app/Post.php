@@ -10,23 +10,25 @@ use Validator;
 class Post extends Model
 {
 	use Notifiable;
+    
 	protected $fillable = [
-        'id','thumbimg','title','content','status',
+        'id','thumbimg','title','content','status','idpost',
     ];
     //
 	public static function validator(array $data)
     {
 		//dd($data);
         return Validator::make($data, [
-            'thumbimg' => ['image'],
+            'thumbimg' => ['required','string'],
             'title' => ['required','string'],
 			'content' => ['required','string'],
             'status' => ['required','int'],
+            'idpost' => ['required','int'],
         ],
         [
             'image' => ':attribute không hợp lệ',
             'required' => ':attribute không được để trống',
-            'string' => ':attribute chỉ được nhập chữ, số'
+            'string' => ':attribute chỉ được nhập chữ, số',
             'int' => ':attribute chỉ được nhập số',
         ],
         [
@@ -34,6 +36,7 @@ class Post extends Model
             'title' => 'Tiêu đề bài viết',
             'content' => 'Nội dung',
             'status' => 'Trạng thái',
+            'idpost' => 'Thể loại',
         ]);
     }	
 }
