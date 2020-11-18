@@ -23,6 +23,7 @@ class Post extends Model
             'title' => ['required','string'],
 			'content' => ['required','string'],
             'status' => ['required','int'],
+            'idpost' => ['required','int'],
         ],
         [
             'image' => ':attribute không hợp lệ',
@@ -35,6 +36,7 @@ class Post extends Model
             'title' => 'Tiêu đề bài viết',
             'content' => 'Nội dung',
             'status' => 'Trạng thái',
+            'idpost' => 'Thể loại',
         ]);
     }	
 }

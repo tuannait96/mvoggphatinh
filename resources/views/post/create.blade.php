@@ -6,6 +6,8 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
 
@@ -48,7 +50,46 @@
                 'status': 1,
                 'idpost': 1
             }, function(data){
-                console.log(data);
+                // console.log(data.responseText());
+                toastr.success('Thành công!!!','THÔNG BÁO');
+                toastr.options = {
+                      "closeButton": true,
+                      "debug": false,
+                      "newestOnTop": true,
+                      "progressBar": true,
+                      "positionClass": "toast-top-center",
+                      "preventDuplicates": true,
+                      "onclick": null,
+                      "showDuration": "300",
+                      "hideDuration": "1000",
+                      "timeOut": "5000",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                }
+            }).fail(function(data)
+            {
+                toastr.error('Không thàng công!!!','THÔNG BÁO');
+                toastr.options = {
+                      "closeButton": true,
+                      "debug": false,
+                      "newestOnTop": true,
+                      "progressBar": true,
+                      "positionClass": "toast-top-center",
+                      "preventDuplicates": true,
+                      "onclick": null,
+                      "showDuration": "300",
+                      "hideDuration": "1000",
+                      "timeOut": "5000",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                }
+                // console.log(data.responseText);
             })
         }
 		
