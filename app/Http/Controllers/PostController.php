@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Dutu;
 use App\Post;
+use App\Category;
 // 
 use Auth;
 use Redirect;
@@ -20,7 +21,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        $lstpost = Post::all();
+        $lstpost = Post::paginate(3);
         return view('post.list',compact('lstpost'));
     }
 
@@ -31,7 +32,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+        $lstcategory = Category::all();
+        return view('post.create',compact('lstcategory'));
         //
     }
 
@@ -77,7 +79,8 @@ class PostController extends Controller
         //
 		// $post = Post::get()->where('id',$id)->first();
         $post = Post::findOrFail($id);
-        return view('post.edit',compact('post'));
+       
+        return view('post.view',compact('post'));
     }
 
     /**
@@ -90,8 +93,9 @@ class PostController extends Controller
     {
         //
 		$post = Post::findOrFail($id);
+        $lstcategory = Category::all();
         // dd($post);
-        return view('post.edit',compact('post'));
+        return view('post.edit',compact('post','lstcategory'));
     }
 
     /**
@@ -104,7 +108,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
-
+        // return $request->all();
         if(Auth::user()->roleid != 1)
         {
             return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');

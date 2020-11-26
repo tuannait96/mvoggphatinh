@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Providers\RouteServiceProvider;
+use App\Post;
+use App\Category;
 use App\User;
 use App\Role;
 
@@ -26,8 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-		$all = User::all();
+		//$all = User::all();
 		//$all->toJson();
-        return view('user.home',compact('all'));
+        $lstpost = Post::paginate(3);
+        return view('user.home',compact('lstpost'));
     }
 }
