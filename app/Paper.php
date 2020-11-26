@@ -11,7 +11,7 @@ class Paper extends Model
 {
 	use Notifiable;
 	protected $fillable = [
-        'id','time',
+        'name',
     ];
     //
 	public static function validator(array $data)

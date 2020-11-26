@@ -8,6 +8,7 @@ class CreateStatusesTable extends Migration
 {
     /**
      * Run the migrations.
+     link with DUTU
      *
      * @return void
      */
