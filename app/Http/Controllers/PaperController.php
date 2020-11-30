@@ -115,7 +115,10 @@ class PaperController extends Controller
             {
                 try {
                     Paper::where('id',$id)->update(
-                        ['name'=>$request->name,]);
+                        [
+                            'name'=>$request->name,
+                            'url'=>$request->url,
+                        ]);
                     return 'Thanh Cong!';
                 } catch (\Exception $e) {
                     return $e->getMessage();

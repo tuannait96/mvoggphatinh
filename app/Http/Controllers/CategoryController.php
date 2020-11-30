@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Redirect;
+use Auth;
+use App\Category;
+
+
+
 
 class CategoryController extends Controller
 {
@@ -15,6 +22,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        $lstcat = Category::all();
+        return view('category.list',compact('lstcat'));
     }
 
     /**
@@ -24,6 +33,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        return view('Category.create');
         //
     }
 
@@ -36,6 +46,29 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        if(Auth::user()->roleid != 1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        else
+        {
+            if(Category::validator($request->all())->fails())
+                return Redirect::back()->withErrors(Category::validator($request->all()));
+            else
+            {
+                try {
+                    Category::create(
+                        [
+                            'name' => $request->name,
+                            'status' => $request->status,
+                        ]);
+                    // return Paper::create(['name'=>$request->name,])->id;
+                    return 'Thành công!!!';
+                } catch (\Exception $e) {
+                    return $e->getMessage();
+                }
+            }
+        }
     }
 
     /**
@@ -47,6 +80,8 @@ class CategoryController extends Controller
     public function show($id)
     {
         //
+        $cat = Category::findOrFail($id);
+        return view('category.view',compact('cat'));
     }
 
     /**
@@ -58,6 +93,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         //
+        $cat = Category::findOrFail($id);
+        return view('category.edit',compact('cat'));
     }
 
     /**
@@ -70,6 +107,29 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if(Auth::user()->roleid != 1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        else
+        {
+            if(Category::validator($request->all())->fails())
+                return Redirect::back()->withErrors(Category::validator($request->all()));
+            else
+            {
+                try {
+                    Category::where('id',$id)->update(
+                        [
+                            'name' => $request->name,
+                            'status' => $request->status,
+                        ]);
+                    // return Paper::create(['name'=>$request->name,])->id;
+                    return 'Thành công!!!';
+                } catch (\Exception $e) {
+                    return $e->getMessage();
+                }
+            }
+        }
     }
 
     /**
@@ -81,5 +141,15 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+        if(Auth::user()->roleid!=1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        try {
+            Category::where('id',$id)->delete();
+            return Redirect::back()->with('message','Xoá thành công');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

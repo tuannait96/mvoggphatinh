@@ -13,7 +13,7 @@ class Diemthi extends Model
     use Notifiable;
 	
 	protected $fillable = [
-        'iddutu','idnam','diem',
+        'iddutu','idnam','diem','nam',
     ];
 
     public static function validator(array $data)

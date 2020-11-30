@@ -16,7 +16,7 @@ class CreateDiemthisTable extends Migration
         Schema::create('diemthis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('iddutu');
-            $table->string('idnam');
+            $table->unsignedBigInteger('idnam');
             $table->string('nam')->nullable();
             $table->decimal('diem',8,2);
             $table->foreign('iddutu')->references('id')->on('dutus');

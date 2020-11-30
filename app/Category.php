@@ -12,26 +12,29 @@ class Category extends Model
     //
     use Notifiable;
     protected $fillable = [
-        'name',
+        'name','status',
     ];
 
     public function getpost()
     {
-    	return $this->hasMany('App\Post','idpost','id');
+    	return $this->hasMany('App\Post','idcategory','id');
     }
 
     public static function validator(array $data)
     {
+        // dd($data);
     	return Validator::make($data,[
     		'name' => ['required','string'],
+            'status' => ['required','int'],
     	],
     	[
     		'required' => ':attribute không được để trống',
-    		'string' => '"attribute chỉ được nhập kí tự',
-
+    		'string' => ':attribute chỉ được nhập kí tự',
+            'int' => ':attribute chỉ được nhập số',
     	],
     	[
     		'name' => 'Tên',
+            'status' => 'Tình Trạng',
     	]);
     }
 }

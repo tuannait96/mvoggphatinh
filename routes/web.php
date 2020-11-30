@@ -49,18 +49,43 @@ Route::post('post/store','PostController@store')->name('save.post')->middleware(
 Route::get('post/edit/{id}','PostController@edit')->name('getupdate.post')->middleware('auth');
 
 //Route for Category
+Route::get('category','CategoryController@index');
+Route::get('category/create','CategoryController@create')->name('create.category')->middleware('auth');
+Route::get('category/{id}','CategoryController@show')->name('show.category');
+Route::get('category/delete/{id}','CategoryController@destroy')->name('delete.category')->middleware('auth');
+Route::post('category/edit/{id}','CategoryController@update')->name('update.category')->middleware('auth');
+Route::post('category/store','CategoryController@store')->name('save.category')->middleware('auth');
+Route::get('category/edit/{id}','CategoryController@edit')->name('getupdate.category')->middleware('auth');
+
+
 
 //Route for Dong Tu
+Route::get('dongtu','DongtuController@index');
+Route::get('dongtu/create','DongtuController@create')->name('create.dongtu')->middleware('auth');
+Route::get('dongtu/{id}','DongtuController@show')->name('show.dongtu');
+Route::get('dongtu/delete/{id}','DongtuController@destroy')->name('delete.dongtu')->middleware('auth');
+Route::post('dongtu/edit/{id}','DongtuController@update')->name('update.dongtu')->middleware('auth');
+Route::post('dongtu/store','DongtuController@store')->name('save.dongtu')->middleware('auth');
+Route::get('dongtu/edit/{id}','DongtuController@edit')->name('getupdate.dongtu')->middleware('auth');
+
 
 //Route for Paper
 Route::get('paper','PaperController@index');
 Route::get('paper/create','PaperController@create')->name('create.paper')->middleware('auth');
 Route::get('paper/{id}','PaperController@show')->name('show.paper');
-Route::delete('paper/delete/{id}','PaperController@destroy')->name('delete.paper')->middleware('auth');
+Route::get('paper/delete/{id}','PaperController@destroy')->name('delete.paper')->middleware('auth');
 Route::post('paper/edit/{id}','PaperController@update')->name('update.paper')->middleware('auth');
 Route::post('paper/store','PaperController@store')->name('save.paper')->middleware('auth');
 Route::get('paper/edit/{id}','PaperController@edit')->name('getupdate.paper')->middleware('auth');
-//Route for 
+
+//Route for DiemThi
+Route::get('diemthi','DiemthiController@index');
+Route::get('diemthi/create','DiemthiController@create')->name('create.diemthi')->middleware('auth');
+Route::get('diemthi/{id}','DiemthiController@show')->name('show.diemthi');
+Route::get('diemthi/delete/{id}','DiemthiController@destroy')->name('delete.diemthi')->middleware('auth');
+Route::post('diemthi/edit/{id}','DiemthiController@update')->name('update.diemthi')->middleware('auth');
+Route::post('diemthi/store','DiemthiController@store')->name('save.diemthi')->middleware('auth');
+Route::get('diemthi/edit/{id}','DiemthiController@edit')->name('getupdate.diemthi')->middleware('auth');
 
 //route CKFINDER
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
