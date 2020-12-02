@@ -12,7 +12,7 @@ class Notifications extends Model
     //
     use Notifiable;
     protected $fillable = [
-    	'id','title','content','status'
+    	'id','title','content','status',
     ];
 
     public static function validator(array $data)

@@ -87,6 +87,24 @@ Route::post('diemthi/edit/{id}','DiemthiController@update')->name('update.diemth
 Route::post('diemthi/store','DiemthiController@store')->name('save.diemthi')->middleware('auth');
 Route::get('diemthi/edit/{id}','DiemthiController@edit')->name('getupdate.diemthi')->middleware('auth');
 
+//Route for Zone
+Route::get('zone','ZoneController@index');
+Route::get('zone/create','ZoneController@create')->name('create.zone')->middleware('auth');
+Route::get('zone/{id}','ZoneController@show')->name('show.zone');
+Route::get('zone/delete/{id}','ZoneController@destroy')->name('delete.zone')->middleware('auth');
+Route::post('zone/edit/{id}','ZoneController@update')->name('update.zone')->middleware('auth');
+Route::post('zone/store','ZoneController@store')->name('save.zone')->middleware('auth');
+Route::get('zone/edit/{id}','ZoneController@edit')->name('getupdate.zone')->middleware('auth');
+
+//Route for Notifications
+Route::get('notifi','NotificationsController@index');
+Route::get('notifi/create','NotificationsController@create')->name('create.notifi')->middleware('auth');
+Route::get('notifi/{id}','NotificationsController@show')->name('show.notifi');
+Route::get('notifi/delete/{id}','NotificationsController@destroy')->name('delete.notifi')->middleware('auth');
+Route::post('notifi/edit/{id}','NotificationsController@update')->name('update.notifi')->middleware('auth');
+Route::post('notifi/store','NotificationsController@store')->name('save.notifi')->middleware('auth');
+Route::get('notifi/edit/{id}','NotificationsController@edit')->name('getupdate.notifi')->middleware('auth');
+
 //route CKFINDER
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
     ->name('ckfinder_connector');

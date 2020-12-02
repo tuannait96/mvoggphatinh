@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Redirect;
+
+
+
+use App\Notifications;
+use Auth;
 
 class NotificationsController extends Controller
 {
@@ -15,6 +22,8 @@ class NotificationsController extends Controller
     public function index()
     {
         //
+        $lstnoti = Notifications::all();
+        return view('thongbao.list',compact('lstnoti'));
     }
 
     /**
@@ -25,6 +34,7 @@ class NotificationsController extends Controller
     public function create()
     {
         //
+        return view('thongbao.create');
     }
 
     /**
@@ -35,7 +45,35 @@ class NotificationsController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         //
+        if(Auth::user()->roleid == 1)
+        {
+
+            if (Notifications::validator($request->all())->fails()) {
+                # code...
+                return Redirect::back()->withErrors(Notifications::validator($request->all()));
+            }
+            else
+            {
+                // dd('Vo Auth');
+                try {
+                    Notifications::create(
+                        [
+                            'title' => $request->title,
+                            'content' => $request->content,
+                            'status' => $request->status,
+                        ]);
+                    return Redirect::back()->with('message','Tạo thành công Thông báo!!!');
+                } catch (\Exception $e) {
+                    return Redirect::back()->with('message','Tạo không thành công!!!');
+                }
+            }
+        }
+        else
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thêm mới một Thông báo!!!');
+        }
     }
 
     /**
@@ -47,6 +85,8 @@ class NotificationsController extends Controller
     public function show($id)
     {
         //
+        $noti = Notifications::findOrfail($id);
+        return view('thongbao.view',compact('noti'));
     }
 
     /**
@@ -58,6 +98,12 @@ class NotificationsController extends Controller
     public function edit($id)
     {
         //
+        if(Auth::user()->roleid != 1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        $noti = Notifications::findOrfail($id);
+        return view('thongbao.edit',compact('noti'));
     }
 
     /**
@@ -70,6 +116,29 @@ class NotificationsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if(Auth::user()->roleid!=1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        else
+        {
+            if(Notifications::validator($request->all())->fails())
+                return Redirect::back()->with('message','Vui lòng điền đầy đủ các trường');
+            else
+            {
+                try {
+                    Notifications::where('id',$id)->update(
+                        [
+                            'title' => $request->title,
+                            'content' => $request->content,
+                            'status' => $request->status,
+                        ]);
+                    return 'Thanh Cong!';
+                } catch (\Exception $e) {
+                    return $e->getMessage();
+                }
+            }
+        }
     }
 
     /**
@@ -81,5 +150,15 @@ class NotificationsController extends Controller
     public function destroy($id)
     {
         //
+        if(Auth::user()->roleid!=1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        try {
+            Notifications::where('id',$id)->delete();
+            return Redirect::back()->with('message','Xoá thành công');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

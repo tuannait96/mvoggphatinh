@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Auth;
 use App\Diemthi;
+use App\Dutu;
+
 class DiemthiController extends Controller
 {
     /**
@@ -16,6 +18,8 @@ class DiemthiController extends Controller
     public function index()
     {
         //
+        $lstdiemthi = Diemthi::all();
+        return view('diemthi.list',compact('lstdiemthi'));
     }
 
     /**
@@ -26,6 +30,10 @@ class DiemthiController extends Controller
     public function create()
     {
         //
+        // $lstdutu = Dutu::all();
+        $lstdutu = Dutu::with('nameyear')->get();
+        $index = 1;
+        return view('diemthi.create',compact('lstdutu','index'));
     }
 
     /**

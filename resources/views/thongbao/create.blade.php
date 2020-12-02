@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Hahha</title>
+	<title>Create Thong Bao</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -25,9 +25,11 @@
 		<marquee>{{session('message')}}</marquee>	
         <div class="alert alert-info"></div>
     @endif
-	<form method="post" action="{{route('save.paper')}}">
+	<form method="post" action="{{route('save.notifi')}}">
 	@csrf
-	<input type="text" name="name">
+	<input type="text" name="title">
+	<input type="text" name="content">
+	<input type="checkbox" name="status" value="1">
 	<button>Submit</button>
 	</form>
 	<button onclick="preview()">Preview</button>

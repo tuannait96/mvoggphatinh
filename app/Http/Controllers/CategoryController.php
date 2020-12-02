@@ -93,6 +93,10 @@ class CategoryController extends Controller
     public function edit($id)
     {
         //
+        if(Auth::user()->roleid != 1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
         $cat = Category::findOrFail($id);
         return view('category.edit',compact('cat'));
     }

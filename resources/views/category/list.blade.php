@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="table-responsive">
-		<table class="table">
+		<table class="table table-bordered">
 			<tr>
 				<th>Name</th>
 				<th>Status</th>
