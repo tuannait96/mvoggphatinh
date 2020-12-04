@@ -31,6 +31,6 @@ class HomeController extends Controller
 		//$all = User::all();
 		//$all->toJson();
         $lstpost = Post::paginate(3);
-        return view('user.home',compact('lstpost'));
+        return view('user.home',compact('lstpost'));//
     }
 }

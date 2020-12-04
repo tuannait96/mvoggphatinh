@@ -1,22 +1,39 @@
- <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <ul class="social-icons">
-              <li><a href="#">Facebook</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Behance</a></li>
-              <li><a href="#">Linkedin</a></li>
-              <li><a href="#">Dribbble</a></li>
+<footer id="footer">
+    <div class="footer_top">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="footer_widget wow fadeInLeftBig">
+            <h2>Flickr Images</h2>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="footer_widget wow fadeInDown">
+            <h2>Tag</h2>
+            <ul class="tag_nav">
+              <li><a href="#">Games</a></li>
+              <li><a href="#">Sports</a></li>
+              <li><a href="#">Fashion</a></li>
+              <li><a href="#">Business</a></li>
+              <li><a href="#">Life &amp; Style</a></li>
+              <li><a href="#">Technology</a></li>
+              <li><a href="#">Photo</a></li>
+              <li><a href="#">Slider</a></li>
             </ul>
           </div>
-          <div class="col-lg-12">
-            <div class="copyright-text">
-              <p>Copyright 2020 Stand Blog Co.
-                    
-                 | Design: <a rel="nofollow" href="https://templatemo.com" target="_parent">TemplateMo</a></p>
-            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="footer_widget wow fadeInRightBig">
+            <h2>Contact</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <address>
+            Perfect News,1238 S . 123 St.Suite 25 Town City 3333,USA Phone: 123-326-789 Fax: 123-546-567
+            </address>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+    <div class="footer_bottom">
+      <p class="copyright">Copyright &copy; 2045 <a href="index.html">NewsFeed</a></p>
+      <p class="developer">Developed By Wpfreeware</p>
+    </div>
+  </footer>

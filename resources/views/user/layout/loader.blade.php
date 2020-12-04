@@ -1,9 +1,4 @@
- <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
-    <!-- ***** Preloader End ***** -->
+<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>

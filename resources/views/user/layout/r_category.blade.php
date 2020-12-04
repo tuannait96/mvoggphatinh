@@ -1,71 +1,100 @@
-<div class="col-lg-3">
-            <div class="sidebar">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="sidebar-item search">
-                    <form id="search_form" name="gs" method="GET" action="#">
-                      <input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
-                    </form>
-                  </div>
+<div class="col-lg-4 col-md-4 col-sm-4">
+        <aside class="right_content">
+          <div class="single_sidebar">
+            <h2><span>Popular Post</span></h2>
+            <ul class="spost_nav">
+              <li>
+                <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 1</a> </div>
                 </div>
-                <div class="col-lg-12">
-                  <div class="sidebar-item recent-posts">
-                    <div class="sidebar-heading">
-                      <h2>Recent Posts</h2>
-                    </div>
-                    <div class="content">
-                      <ul>
-                        <li><a href="post-details.html">
-                          <h5>Vestibulum id turpis porttitor sapien facilisis scelerisque</h5>
-                          <span>May 31, 2020</span>
-                        </a></li>
-                        <li><a href="post-details.html">
-                          <h5>Suspendisse et metus nec libero ultrices varius eget in risus</h5>
-                          <span>May 28, 2020</span>
-                        </a></li>
-                        <li><a href="post-details.html">
-                          <h5>Swag hella echo park leggings, shaman cornhole ethical coloring</h5>
-                          <span>May 14, 2020</span>
-                        </a></li>
-                      </ul>
-                    </div>
-                  </div>
+              </li>
+              <li>
+                <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
                 </div>
-                <div class="col-lg-12">
-                  <div class="sidebar-item categories">
-                    <div class="sidebar-heading">
-                      <h2>Categories</h2>
-                    </div>
-                    <div class="content">
-                      <ul>
-                        <li><a href="#">- Nature Lifestyle</a></li>
-                        <li><a href="#">- Awesome Layouts</a></li>
-                        <li><a href="#">- Creative Ideas</a></li>
-                        <li><a href="#">- Responsive Templates</a></li>
-                        <li><a href="#">- HTML5 / CSS3 Templates</a></li>
-                        <li><a href="#">- Creative &amp; Unique</a></li>
-                      </ul>
-                    </div>
-                  </div>
+              </li>
+              <li>
+                <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
                 </div>
-                <div class="col-lg-12">
-                  <div class="sidebar-item tags">
-                    <div class="sidebar-heading">
-                      <h2>Tag Clouds</h2>
-                    </div>
-                    <div class="content">
-                      <ul>
-                        <li><a href="#">Lifestyle</a></li>
-                        <li><a href="#">Creative</a></li>
-                        <li><a href="#">HTML5</a></li>
-                        <li><a href="#">Inspiration</a></li>
-                        <li><a href="#">Motivation</a></li>
-                        <li><a href="#">PSD</a></li>
-                        <li><a href="#">Responsive</a></li>
-                      </ul>
-                    </div>
-                  </div>
+              </li>
+              <li>
+                <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
                 </div>
+              </li>
+            </ul>
+          </div>
+          <div class="single_sidebar">
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">Category</a></li>
+              <li role="presentation"><a href="#video" aria-controls="profile" role="tab" data-toggle="tab">Video</a></li>
+              <li role="presentation"><a href="#comments" aria-controls="messages" role="tab" data-toggle="tab">Comments</a></li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="category">
+                <ul>
+                  <li class="cat-item"><a href="#">Sports</a></li>
+                  <li class="cat-item"><a href="#">Fashion</a></li>
+                  <li class="cat-item"><a href="#">Business</a></li>
+                  <li class="cat-item"><a href="#">Technology</a></li>
+                  <li class="cat-item"><a href="#">Games</a></li>
+                  <li class="cat-item"><a href="#">Life &amp; Style</a></li>
+                  <li class="cat-item"><a href="#">Photography</a></li>
+                </ul>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="video">
+                <div class="vide_area">
+                  <iframe width="100%" height="250" src="http://www.youtube.com/embed/h5QWbURNEpA?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="comments">
+                <ul class="spost_nav">
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 1</a> </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="images/post_img2.jpg"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
+          <div class="single_sidebar wow fadeInDown">
+            <h2><span>Sponsor</span></h2>
+            <a class="sideAdd" href="#"><img src="images/add_img.jpg" alt=""></a> </div>
+          <div class="single_sidebar wow fadeInDown">
+            <h2><span>Category Archive</span></h2>
+            <select class="catgArchive">
+              <option>Select Category</option>
+              <option>Life styles</option>
+              <option>Sports</option>
+              <option>Technology</option>
+              <option>Treads</option>
+            </select>
+          </div>
+          <div class="single_sidebar wow fadeInDown">
+            <h2><span>Links</span></h2>
+            <ul>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Rss Feed</a></li>
+              <li><a href="#">Login</a></li>
+              <li><a href="#">Life &amp; Style</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
