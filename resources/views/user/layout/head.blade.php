@@ -3,6 +3,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="{{asset('admin_asset/plugins/fontawesome-free/css/all.min.css')}}"> -->
+  <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
+  <!-- <link rel="stylesheet" href="{{asset('admin_asset/dist/css/adminlte.min.css')}}"> -->
 <link rel="stylesheet" type="text/css" href="{{asset('user_asset/assets/css/bootstrap.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('user_asset/assets/css/font-awesome.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('user_asset/assets/css/animate.css')}}">
@@ -26,6 +29,11 @@
 	}
 	.header_bottom {
     padding: 1px 30px 10px;
-}
+    height: 75px;
+    }
+    .top_nav li a{
+    	padding-top: 5px;
+    	padding-bottom: 5px;	
+    }
 </style>
 </head>
