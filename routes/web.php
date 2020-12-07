@@ -53,7 +53,13 @@ Route::get('post/edit/{id}','PostController@edit')->name('getupdate.post')->midd
 //Route for Dong Tu
 
 //Route for Paper
-
+Route::get('paper','PaperController@index');
+Route::get('paper/create','PaperController@create')->name('create.paper')->middleware('auth');
+Route::get('paper/{id}','PaperController@show')->name('show.paper');
+Route::delete('paper/delete/{id}','PaperController@destroy')->name('delete.paper')->middleware('auth');
+Route::post('paper/edit/{id}','PaperController@update')->name('update.paper')->middleware('auth');
+Route::post('paper/store','PaperController@store')->name('save.paper')->middleware('auth');
+Route::get('paper/edit/{id}','PaperController@edit')->name('getupdate.paper')->middleware('auth');
 //Route for 
 
 //route CKFINDER

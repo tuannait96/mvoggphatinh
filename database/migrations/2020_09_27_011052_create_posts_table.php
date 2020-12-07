@@ -17,10 +17,10 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('thumbimg');
             $table->string('title');
-			$table->string('content');
-            $table->unsignedBigInteger('idpost');
+			$table->longText('content');
+            $table->unsignedBigInteger('idcategory');
             $table->unsignedBigInteger('status');
-            $table->foreign('idpost')->references('id')->on('categories');
+            $table->foreign('idcategory')->references('id')->on('categories');
             $table->timestamps();
         });
     }

@@ -25,6 +25,7 @@ class CreateDutusTable extends Migration
 			$table->unsignedBigInteger('idzone');
 			$table->unsignedBigInteger('idyear');
 			$table->unsignedBigInteger('idstatus');
+            $table->unsignedBigInteger('check');
 			$table->foreign('id')->references('id')->on('users');
 			$table->foreign('idzone')->references('id')->on('zones');
 			$table->foreign('idyear')->references('id')->on('years');
