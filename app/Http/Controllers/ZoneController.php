@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Redirect;
 use App\Zone;
+use Auth;
 
 class ZoneController extends Controller
 {
@@ -16,6 +19,8 @@ class ZoneController extends Controller
     public function index()
     {
         //
+        $lstzone = Zone::all();
+        return view('zone.list',compact('lstzone'));
     }
 
     /**
@@ -26,6 +31,7 @@ class ZoneController extends Controller
     public function create()
     {
         //
+        return view('zone.create');
     }
 
     /**
@@ -37,9 +43,27 @@ class ZoneController extends Controller
     public function store(Request $request)
     {
         //
-		Zone::create(
-		['name'=>$request->name,
-		]);
+        if(Auth::user()->roleid!=1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        else
+        {
+            if(Zone::validator($request->all())->fails())
+                return Redirect::back()->with('message','Vui lòng điền đầy đủ các trường');
+            else
+            {
+                try {
+                    Zone::create(
+                        [
+                            'name'=>$request->name,
+                        ]);
+                    return 'Thành công!!!';
+                } catch (\Exception $e) {
+                    return $e->getMessage();
+                }
+            }
+        }
     }
 
     /**
@@ -51,7 +75,8 @@ class ZoneController extends Controller
     public function show($id)
     {
         //
-		$zone=Zone::get()->where('id',$id);
+		$zone = Zone::findOrfail($id);
+        return view('zone.view',compact('zone'));
     }
 
     /**
@@ -63,7 +88,12 @@ class ZoneController extends Controller
     public function edit($id)
     {
         //
-		$zone=Zone::where('id',$id)->first();
+        if(Auth::user()->roleid != 1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+		$zone = Zone::findOrfail($id);
+        return view('zone.edit',compact('zone'));
     }
 
     /**
@@ -76,9 +106,27 @@ class ZoneController extends Controller
     public function update(Request $request, $id)
     {
         //
-		Zone::where('id',$id)->update(
-		['name'=>$request->name,
-		]);
+		if(Auth::user()->roleid!=1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
+        else
+        {
+            if(Zone::validator($request->all())->fails())
+                return Redirect::back()->with('message','Vui lòng điền đầy đủ các trường');
+            else
+            {
+                try {
+                    Zone::where('id',$id)->update(
+                        [
+                            'name'=>$request->name,
+                        ]);
+                    return 'Thành công!!!';
+                } catch (\Exception $e) {
+                    return $e->getMessage();
+                }
+            }
+        }
     }
 
     /**
@@ -90,7 +138,7 @@ class ZoneController extends Controller
     public function destroy($id)
     {
         //
-        if(Auth::user()->roleid!=1)
+        if(Auth::user()->roleid != 1)
         {
             return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
         }

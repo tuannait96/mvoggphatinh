@@ -77,6 +77,7 @@ class PaperController extends Controller
     public function show($id)
     {
         //
+
 		$paper = Paper::findOrFail($id);
         return view ('paper.view',compact('paper'));
     }
@@ -89,6 +90,10 @@ class PaperController extends Controller
     public function edit($id)
     {
         //
+        if(Auth::user()->roleid != 1)
+        {
+            return Redirect::back()->with('message','Bạn không có quyền thực hiện hành động này!!!');
+        }
 		$paper = Paper::findOrFail($id);
         return view('paper.edit',compact('paper'));
 		//return trang edit paper
@@ -115,7 +120,10 @@ class PaperController extends Controller
             {
                 try {
                     Paper::where('id',$id)->update(
-                        ['name'=>$request->name,]);
+                        [
+                            'name'=>$request->name,
+                            'url'=>$request->url,
+                        ]);
                     return 'Thanh Cong!';
                 } catch (\Exception $e) {
                     return $e->getMessage();

@@ -12,7 +12,7 @@ class Post extends Model
 	use Notifiable;
     
 	protected $fillable = [
-        'id','thumbimg','title','content','status','idpost',
+        'id','thumbimg','title','content','status','idcategory',
     ];
     //
 	public static function validator(array $data)
@@ -23,7 +23,7 @@ class Post extends Model
             'title' => ['required','string'],
 			'content' => ['required','string'],
             'status' => ['required','int'],
-            'idpost' => ['required','int'],
+            'idcategory' => ['required','int'],
         ],
         [
             'image' => ':attribute không hợp lệ',
@@ -36,7 +36,7 @@ class Post extends Model
             'title' => 'Tiêu đề bài viết',
             'content' => 'Nội dung',
             'status' => 'Trạng thái',
-            'idpost' => 'Thể loại',
+            'idcategory' => 'Thể loại',
         ]);
     }	
 }
