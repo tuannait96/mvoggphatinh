@@ -133,6 +133,7 @@
   <script>
         function Save()
         {
+         
             var data = CKEDITOR.instances.text.getData();
             // alert(data);
             $.post('{{route('save.post')}}',{
@@ -141,9 +142,9 @@
                 'title': $('#title').val(),
                 'content': data,
                 'status': 1,
-                'idpost': jQuery('[name=idpost]').val()
+                'idcategory': jQuery('[name=idpost]').val()
             }, function(data){
-                // console.log(data.responseText());
+                console.log(data);
                 toastr.success('Thành công!!!','THÔNG BÁO');
                 toastr.options = {
                       "closeButton": true,
@@ -162,7 +163,7 @@
                       "showMethod": "fadeIn",
                       "hideMethod": "fadeOut"
                 }
-                location.reload(); 
+                // location.reload(); 
 
             }).fail(function(data)
             {

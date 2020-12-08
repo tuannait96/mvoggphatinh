@@ -81,7 +81,7 @@ class DutuController extends Controller
 			{
 				//dd(Dutu::validator($request->all())->errors());
 				$vali=Dutu::validator($request->all());
-				//dd($vali->errors());
+				dd($vali->errors());
 				return Redirect::back()->withErrors($vali);
 			}
 			else
@@ -98,11 +98,13 @@ class DutuController extends Controller
 					'idzone'=>$request->idzone,
 					'idyear'=>$request->idyear,
 					'idstatus'=>$request->idstatus,
+					'check' => 0,
 					]);
 					return redirect()->route('home')->with('message','Đăng kí thành công!!!');
 				}
 				catch(\Exception $e)
 				{
+					dd($e->getMessage());
 					return Redirect::back()->withErrors($e->getMessage());
 					dd(($e->getMessage()));
 				}

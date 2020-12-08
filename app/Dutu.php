@@ -12,7 +12,7 @@ class Dutu extends Model
 	use Notifiable;
 	
 	protected $fillable = [
-        'id','profileimg','name','holyname','dob','school','majors','parish','idzone','idyear','idstatus',
+        'id','profileimg','name','holyname','dob','school','majors','parish','idzone','idyear','idstatus','check',
     ];
     //
 	/**
@@ -52,7 +52,7 @@ class Dutu extends Model
     {
 		//dd($data);
         return Validator::make($data, [
-        	'profileimg' => ['image'],
+        	// 'profileimg' => ['image'],
 			'holyname' => ['required','string','max:255'],
             'name' => ['required', 'string', 'max:255'],
 			'dob' => ['required','date','after:01-01-1900','before:30-12-3000'],
