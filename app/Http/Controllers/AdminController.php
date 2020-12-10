@@ -28,6 +28,7 @@ class AdminController extends Controller
         $iddt=Dutu::get()->where('idstatus','1');
 		//get all dutu from zone...
 		$izone=Dutu::get();
+
         try {
             //dd(($izone->first->getattend->getattend)->sortBy('month'));
         } catch (\Exception $e) {
@@ -37,6 +38,7 @@ class AdminController extends Controller
         $index=1;
         $index2=1;
         return view('admin.home',compact('iddt','izone','index','index2'));
+
 		
     }
 
@@ -106,5 +108,22 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function gety()
+    {
+        $year = $_GET['year'];
+        //return $p;
+       // foreach (Attendance as $i => where) {
+            # code...
+        //}
+        $lstdd = Attendance::all();
+       
+        //$lstdd[] = (array)$lstdd1;
+        $lstdutu = Dutu::all();
+       
+        //$lstdutu[] = (array)$lstdutu1;
+        return array($lstdutu,$lstdd);
+        //$total = array('' => , );
+       // return $lstdd;
     }
 }

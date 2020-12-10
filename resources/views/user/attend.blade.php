@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="vi">
+
 
   <head>
 
@@ -49,6 +48,7 @@ https://templatemo.com/tm-551-stand-blog
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-9">
+
   <div class="header-attend">
     <h3><b>Điểm danh nhóm Đà Nẵng</b></h3>
     <h4 style="padding:15px;">Trưởng nhóm: Giuse Nguyễn Anh Tuấn</h4>
@@ -68,25 +68,22 @@ https://templatemo.com/tm-551-stand-blog
   </div>
   <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách điểm danh</h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
+                <select style="float: left;" aria-label="Năm SH" name="ac_year" id="ac_year" title="Năm SH" class="sl_at">
+                   <option value="ALL">Năm Sinh hoạt</option>
+                    @for($i=1; $i<=3; $i++)
+                        <option value="{{$i}}">Năm {{$i}}</option>
+                    @endfor
+                    <option value="4">Dự tu tự do</option>
+                  </select>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap"><thead>
+                <table id="tableID" class="table table-hover text-nowrap"><thead>
                     <tr>
                       <th style="width: 10px">STT</th>
                       <th>Tên dự tu</th>
                       <th>Giáo xứ</th>
+                      <th hidden="true" >Năm SH</th>
                       <th style="width: 100px">Trạng thái</th>
                       <th style="min-width: 180px;">Ghi chú</th>
                     </tr>
@@ -97,8 +94,9 @@ https://templatemo.com/tm-551-stand-blog
                       <td>{{$index++}}</td>
                       <td> {{$dutu->name}}</td>
                       <td>{{$dutu->parish}}</td>
+                      <td hidden="true" >{{$dutu->idyear}}</td>
                       <td>
-                        <input name="{{$dutu->id}}" type="checkbox" id="checkboxPrimary2">
+                        <input name="{{$dutu->id}}" style="min-width: 20px" type="checkbox" id="checkboxPrimary2">
                       </td>
                       <td>
                         <input name="note_{{$dutu->id}}" type="text" class="form-control">
@@ -112,38 +110,7 @@ https://templatemo.com/tm-551-stand-blog
             </div>
             <button class="btn btn-warning" id="Save" >Save</button>
           </div>
-          <div id="msg"> </div>
-          @include('user.layout.r_category')
-        </div>
-      </div>
-    </section>
-
-    @include('user.layout.footer')
-   
-
-    
-   <!-- Bootstrap core JavaScript -->
-    <script src="{{asset('user_asset/assets/js/jquery.min.js')}}"></script>
-    <script src="{{asset('user_asset/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-    <!-- Additional Scripts -->
-    <script src="{{asset('user_asset/assets/js/custom.js')}}"></script>
-    <script src="{{asset('user_asset/assets/js/owl.js')}}"></script>
-    <script src="{{asset('user_asset/assets/js/slick.js')}}"></script>
-    <script src="{{asset('user_asset/assets/js/isotope.js')}}"></script>
-    <script src="{{asset('user_asset/assets/js/accordions.js')}}"></script>
-    <!-- DataTables -->
-<script src="{{asset('admin_asset/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('admin_asset/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('admin_asset/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('admin_asset/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('admin_asset/dist/js/adminlte.min.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{asset('admin_asset/dist/js/demo.js')}}"></script>
-
-  
-    <script type="text/javascript">
+          <script type="text/javascript">
        $('#Save').click(function () {
           statusList = jQuery('input[type=checkbox]')
           data = []
@@ -167,17 +134,30 @@ https://templatemo.com/tm-551-stand-blog
 
             });
     </script>
+    <script type="text/javascript">
+      $('#ac_year').change( function(){
+          var sl, filter, table, tr, td, i, slValue;
+          sl = $('#ac_year');
+          filter = sl.val();
+          table = $("#tableID");
+          tr = $("tr");
+          if (filter === 'ALL') {
+               $ ('tr').show ();
+           }
+           else{
+            for (i = 0; i < tr.length; i++) {
+                  td = tr[i].children[3];
+                  if (td) {
+                    slValue = td.textContent || td.innerText;
+                    if (slValue.toUpperCase().indexOf(filter) > -1) {
+                      tr[i].style.display = "";
+                    } else {
+                      tr[i].style.display = "none";
+                    }
+                  }       
+                }
+           }
+                
+            });
 
-    <script language = "text/Javascript"> 
-      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-      function clearField(t){                   //declaring the array outside of the
-      if(! cleared[t.id]){                      // function makes it static and global
-          cleared[t.id] = 1;  // you could use true and false, but that's more typing
-          t.value='';         // with more chance of typos
-          t.style.color='#fff';
-          }
-      }
-      
     </script>
-  </body>
-  </html>

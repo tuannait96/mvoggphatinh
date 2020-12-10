@@ -2,7 +2,9 @@
 
 	@extends('admin.layout.layout')
 	@section('content')
-   <div class="content-wrapper">
+  
+  <!--------------------------------------------------------->
+
     <section class="content">
       <div class="container-fluid">
        <div class="row">
@@ -103,12 +105,24 @@
                     <div class="form-group col-md-3">
                        <button type="button" id="loc" class="btn btn-primary"><i class='fas fa-filter'></i>   Lọc</button>
                     </div>
-                    
+                   <select aria-label="Năm" name="year" id="year" title="Năm" class="sl_at">
+                      <option value="0">Năm học</option>
+                      @for($i=2016; $i<=date("Y"); $i++)
+                      @if(date("m")<9)
+                      <option @if($i==date("Y")) selected @endif value="{{$i-1}}-{{$i}}">{{$i-1}}-{{$i}}</option>
+                      @else
+                      <option @if($i==date("Y")) selected @endif value="{{$i}}-{{$i+1}}">{{$i}}-{{$i+1}}</option>
+                      @endif
+                      @endfor
+                    </select>
                     </div>
                     
                   </div>
                 </div>
                
+                @if (is_null($izone->first->getattend))
+                  <h3 class="card-title" id="addnhom_title">Chưa có số liệu thống kê!!!</h3>
+                @else
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -147,6 +161,7 @@
                       @endforeach
                   </tbody>
                 </table>
+                @endif
 
 				
 
@@ -163,7 +178,93 @@
        </div>
       </div>
    </section>
-  </div>
+
+  <script type="text/javascript">
+    $('#year').change(function(){
+      
+    //const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    //let sum = 0;
+    //numbers.forEach(function(element){ 
+    //});
+    var nam =$('#year').val();
+      $.get("{{ route('gety') }}",{year: nam},function(data){
+        console.log(nam);
+      var uncheck = "<input type='checkbox' disabled id='checkboxSuccess3'>";
+      var hacheck = "<input type='checkbox' checked disabled id='checkboxSuccess3'>";
+      var tero = $('tr');
+      var tero1=$("tr");
+      for (var i = 0; i < data[0].length; i++){
+         for (var h = 2; h <= 14; h++) {
+          tero1.find("td").eq(h).children().remove();
+          
+          }   
+          tero1 = tero1.next();
+      }
+      const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12];
+      data[0].forEach(function(i){ 
+        //console.log(data[1]);
+        data[1].forEach(function(j){
+          if (i.id == j.iddutu && j.year == nam ) {
+            numbers.forEach(function(k) {
+
+               if (j.month==k) {
+                if (j.month>=9) {
+                  k=k-2;
+                }
+                else {
+                  k=k+12-7;
+                }
+                if (j.status==1) {
+                    tero.find("td").eq(k).append(hacheck);
+                   }
+                if (j.status==0) {
+                    tero.find("td").eq(k).append(uncheck);
+                   }
+               }  
+            })
+          } 
+        });
+        tero = tero.next();
+      });
+      })
+    })
+    
+    $(document).ready(function(){
+      var nam =$('#year').val();
+      $.get("{{ route('gety') }}",{year: nam},function(data){
+      var uncheck = "<input type='checkbox' disabled id='checkboxSuccess3'>";
+      var hacheck = "<input type='checkbox' checked disabled id='checkboxSuccess3'>";
+      var tero = $('tr');      
+      const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12];
+      data[0].forEach(function(i){ 
+        //console.log(data[1]);
+        data[1].forEach(function(j){
+          if (i.id == j.iddutu && j.year == nam ) {
+            numbers.forEach(function(k) {
+               if (j.month==k) {
+                if (j.month >= 9) {
+                  k=k-7;
+                }
+                if(j.month < 9){
+                  k=k+12-7;
+                }
+                if (j.status==1) {
+                    tero.find("td").eq(k).append(hacheck);
+                   }
+                if (j.status==0) {
+                    tero.find("td").eq(k).append(uncheck);
+                   }
+               }  
+            })
+          } 
+        });
+        tero = tero.next();
+      });
+      })
+    })
+  </script>
   <!-- /.content-wrapper -->
   <!-- /.content-wrapper -->
   @endsection
+
+  
