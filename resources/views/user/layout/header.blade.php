@@ -6,19 +6,18 @@
           </div> -->
           <div class="header_top_right" style="float: right;">
             @auth
-           <ul class="top_nav">
-              <li style="float: right;"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a></li>
+           <ul class="top_nav" style="">
+              <li style="float: right; "><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a></li>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
-              <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Dropdown link
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
-      </div>
-    </li>
+              <li class="nav-item dropdown" style="float: right;">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                  {{ Auth::user()->name }}
+                </a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Thông tin cá nhân</a>
+                  <a class="dropdown-item" href="#">Đổi mật khẩu</a>
+                </div>
+            </li>
             </ul>
           @endauth
           @guest
@@ -38,3 +37,4 @@
     </div>
   </header>
   
+

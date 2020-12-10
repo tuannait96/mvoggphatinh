@@ -7,7 +7,7 @@
             <div class="single_post_content_left">
               <ul class="business_catgnav  wow fadeInDown">
                 <li>
-                  <figure class="bsbig_fig"> <a href="pages/single_page.html" class="featured_img"> <img alt="" src=""> <span class="overlay"></span> </a>
+                  <figure class="bsbig_fig"> <a href="pages/single_page.html" class="featured_img"> <img style="max-height: 200px" alt="" src=""> <span class="overlay"></span> </a>
                     <figcaption> <a href="pages/single_page.html">Proin rhoncus consequat nisl eu ornare mauris</a> </figcaption>
                     <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a phare...</p>
                   </figure>
