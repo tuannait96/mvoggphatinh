@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('user_asset/assets/css/jquery.fancybox.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('user_asset/assets/css/theme.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('user_asset/assets/css/style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('user_asset/assets/css/them.css')}}">
 <!--[if lt IE 9]>
 <script src="assets/js/html5shiv.min.js"></script>
 <script src="assets/js/respond.min.js"></script>

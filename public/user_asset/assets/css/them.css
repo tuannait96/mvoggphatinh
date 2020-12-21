@@ -144,3 +144,12 @@ input[type=checkbox]
 .form-control:disabled {
     background-color: #ffffff00;
   }
+  .bsbig_fig figcaption {
+    font-family: Anton;
+  }
+  a{
+    font-family: Anton;
+  }
+  .spost_nav .media-body > a{
+    font-family: Anton;
+  }

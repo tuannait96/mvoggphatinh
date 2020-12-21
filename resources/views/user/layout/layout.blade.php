@@ -9,7 +9,6 @@
  
 <div class="container">
    @include('user.layout.header')
-<<<<<<< HEAD
    @include('user.layout.menu')
    @include('user.layout.chuchay')
   <section id="sliderSection">

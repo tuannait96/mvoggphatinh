@@ -28,9 +28,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-		//$all = User::all();
-		//$all->toJson();
-        $lstpost = Post::paginate(3);
-        return view('user.home',compact('lstpost'));//
+        //$all = User::all();
+        //$all->toJson();
+        // $lstpost = Post::paginate(3);
+        $lstcat = Category::all()->load('getpost');
+        $lstcat = $lstcat->takeWhile(function ($item) {
+            return $item->getpost->count() >0;
+        });
+        // dd($lstcat);
+        $i = 0;
+        return view('user.home',compact('lstcat','i'));//
     }
 }
